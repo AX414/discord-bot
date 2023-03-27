@@ -1,6 +1,6 @@
 # Discord bot
 
-![alt text](https://cdn.discordapp.com/app-icons/1089378822228549733/5951771c6f5575cf87d4130d35f06ca0.png?size=256)
+<kbd><center><img src="https://cdn.discordapp.com/app-icons/1089378822228549733/5951771c6f5575cf87d4130d35f06ca0.png?size=256" styler="border-radius: 25px"/></center></kbd>
 
 Este é um bot de discord que desenvolvi utilizando python, admito que foi bem divertido testar ele junto de meus amigos, principalmente porque eu sempre usei exemplos nem um pouco ortodoxos pra testes.
 
