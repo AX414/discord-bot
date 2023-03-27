@@ -68,8 +68,12 @@ async def join(ctx):
         await ctx.send("{} não está conectado à um canal de voz".format(ctx.message.author.name))
         return
     else:
-        channel = ctx.message.author.voice.channel
-        await channel.connect()
+        voice_client = ctx.message.guild.voice_client
+        if not voice_client:
+            channel = ctx.message.author.voice.channel
+            await channel.connect()
+        else:
+            await ctx.send("O bot já está conectado ao canal de voz.")
 
 @bot.command(name='leave', help='Para expulsar o bot')
 async def leave(ctx):
@@ -102,7 +106,8 @@ async def play(ctx,url):
         await ctx.send('Tocando a música selecionada')
 
     except Exception as err:
-        await ctx.send(err)
+        print(err)
+        return
 
 @bot.command(name='pause', help='Pausa a música atual')
 async def pause(ctx):
@@ -133,32 +138,42 @@ async def cavalo(ctx):
     try :
         await join(ctx)
 
+        voice_client = ctx.message.guild.voice_client
+        if voice_client.is_playing():
+            voice_client.stop()
+
         url = 'https://www.youtube.com/watch?v=1xzGPPxKgJM'
         server = ctx.message.guild
         voice_channel = server.voice_client
 
         filename = await YTDLSource.from_url(url, loop=bot.loop)
-        voice_channel.play(discord.FFmpegPCMAudio(executable="C:\\ffmpeg\\bin\\ffmpeg.exe", source=filename))
+        voice_channel.play(discord.FFmpegPCMAudio(filename, **ffmpeg_options))
 
         await ctx.send('**CAVALO**')
     except Exception as err:
-        await ctx.send(err)
+        print(err)
+        return
 
 @bot.command(name='rapaiz', help='RAPAAAAAIZZZZZZ')
 async def cavalo(ctx):
     try :
         await join(ctx)
         
+        voice_client = ctx.message.guild.voice_client
+        if voice_client.is_playing():
+            voice_client.stop()
+
         url = 'https://www.youtube.com/watch?v=HXYNW0ft5o4'
         server = ctx.message.guild
         voice_channel = server.voice_client
-        
+
         filename = await YTDLSource.from_url(url, loop=bot.loop)            
-        voice_channel.play(discord.FFmpegPCMAudio(executable=(("C:\\ffmpeg\\bin\\ffmpeg.exe") or ("\\media\\ax414\\OS\\ffmpeg\\bin\\ffmpeg.exe")), source=filename))
-        
+        voice_channel.play(discord.FFmpegPCMAudio(filename, **ffmpeg_options))
+
         await ctx.send('**RAPAAAAAIZZZZZZ**')
     except Exception as err:
-        await ctx.send(err)
+        print(err)
+        return
 
 @bot.command(name='apresentar', help='Apresenta dados sobre o servidor')
 async def apresentar(ctx):
@@ -204,7 +219,7 @@ async def help(ctx):
         await ctx.send(embed=embed)
     except Exception as err:
         print(err)
-        
+        return
 
 if __name__ == "__main__" :
     bot.run(DISCORD_TOKEN)
