@@ -1,10 +1,11 @@
 import discord
-from discord.ext import commands,tasks
 import os
-from dotenv import load_dotenv
-import yt_dlp as youtube_dl
 import asyncio
+import ffmpeg
 import random
+import yt_dlp as youtube_dl
+from dotenv import load_dotenv
+from discord.ext import commands,tasks
 
 load_dotenv()
 
@@ -33,6 +34,8 @@ ytdl_format_options = {
         'source_address': '0.0.0.0',
 }
 
+ffmpeg_options = {'options': '-vn'}
+
 ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
 
 class YTDLSource(discord.PCMVolumeTransformer):
@@ -57,8 +60,7 @@ bot.remove_command('help')
 
 @bot.event
 async def on_ready():
-    await apresentarServer()
-    
+    print("Bot pronto.")
 
 @bot.command(name='join', help='Chama o bot para o chat de voz')
 async def join(ctx):
@@ -67,7 +69,7 @@ async def join(ctx):
         return
     else:
         channel = ctx.message.author.voice.channel
-    await channel.connect()
+        await channel.connect()
 
 @bot.command(name='leave', help='Para expulsar o bot')
 async def leave(ctx):
@@ -81,7 +83,7 @@ async def leave(ctx):
 async def play(ctx,url):
     try :
         # Conecta o bot se não estiver conectado
-        await conectarBot(ctx)
+        await join(ctx)
 
         # Se outra pessoa pedir para tocar, ele vai imediatamente
         voice_client = ctx.message.guild.voice_client
@@ -90,11 +92,15 @@ async def play(ctx,url):
 
         server = ctx.message.guild
         voice_channel = server.voice_client
-        
+
         filename = await YTDLSource.from_url(url, loop=bot.loop)
-        voice_channel.play(discord.FFmpegPCMAudio(executable="C:\\ffmpeg\\bin\\ffmpeg.exe", source=filename))
         
+        #windows: "C:\\ffmpeg\\bin\\ffmpeg.exe"                
+        #voice_channel.play(discord.FFmpegPCMAudio(executable="caminho", source=filename))
+        
+        voice_channel.play(discord.FFmpegPCMAudio(filename, **ffmpeg_options))
         await ctx.send('Tocando a música selecionada')
+
     except Exception as err:
         await ctx.send(err)
 
@@ -125,7 +131,7 @@ async def stop(ctx):
 @bot.command(name='cavalo', help='CAVALO')
 async def cavalo(ctx):
     try :
-        await conectarBot(ctx)
+        await join(ctx)
 
         url = 'https://www.youtube.com/watch?v=1xzGPPxKgJM'
         server = ctx.message.guild
@@ -141,14 +147,14 @@ async def cavalo(ctx):
 @bot.command(name='rapaiz', help='RAPAAAAAIZZZZZZ')
 async def cavalo(ctx):
     try :
-        await conectarBot(ctx)
+        await join(ctx)
         
         url = 'https://www.youtube.com/watch?v=HXYNW0ft5o4'
         server = ctx.message.guild
         voice_channel = server.voice_client
         
         filename = await YTDLSource.from_url(url, loop=bot.loop)            
-        voice_channel.play(discord.FFmpegPCMAudio(executable="C:\\ffmpeg\\bin\\ffmpeg.exe", source=filename))
+        voice_channel.play(discord.FFmpegPCMAudio(executable=(("C:\\ffmpeg\\bin\\ffmpeg.exe") or ("\\media\\ax414\\OS\\ffmpeg\\bin\\ffmpeg.exe")), source=filename))
         
         await ctx.send('**RAPAAAAAIZZZZZZ**')
     except Exception as err:
@@ -156,8 +162,19 @@ async def cavalo(ctx):
 
 @bot.command(name='apresentar', help='Apresenta dados sobre o servidor')
 async def apresentar(ctx):
-    await apresentarServer()
+        msgs = ['O bot está on!', 'O Pai tá on!', 'Alguém me chamou?!', 'Opa eae!']
+        gifs = ['hunters', 'dancing_dante','all_good_bb']
+        var = str(random.choice(msgs))+'\n\nCriador(a): {}\nServidor: {}\nQuantia de membros: {}\n'.format(ctx.guild.owner, ctx.guild.name,ctx.guild.member_count)
+        file = discord.File('./gifs/'+str(random.choice(gifs)+'.gif'), filename='image.gif')
 
+        embed = discord.Embed()
+        embed.color = 2123412
+        embed.title = 'Apresentando informações do server:'
+        embed.set_thumbnail(url='attachment://image.gif')
+        embed.description = var
+        
+        await ctx.send(file=file, embed=embed)
+        
 @bot.command(name='surv_build', help='Apresenta uma build de DBD para o survivor')
 async def surv_build(ctx):
     print("a")
@@ -166,42 +183,28 @@ async def surv_build(ctx):
 @bot.command(name='help', help='Esta função exibe os comandos do bot')
 async def help(ctx):
     try:
-        var = "\nComandos:\n\n"
-        var+="/help - Esta função exibe os comandos do bot\n"
+        
+        var="/help - Esta função exibe os comandos do bot\n"
         var+="/join - Chama o bot para o chat de voz\n"
         var+="/play <url> - Toca a musica especificada pela url em seguida\n"
-        #var+="/q - Apresenta a lista de músicas adicionadas\n"
-        #var+="/skip - Avança para a próxima música da lista\n"
-        #var+="/clear - Limpa a lista de músicas\n"
         var+="/leave - Abandona o chat de voz\n"
         var+="/pause - Pausa a música atual\n"
         var+="/resume - Continua com a música\n"
         var+="/stop - Para a música\n"
         var+="/apresentar - Apresenta dados sobre o servidor\n"
-        #var+="------------------------\n"
-        #var+="/surv_build - Apresenta uma build de DBD para o survivor\n"
+        var+="\n"
+        
+        embed = discord.Embed()
+        embed.color = 2123412
+        embed.title = 'Lista de Comandos:'
+        embed.description = var
+        embed.add_field(name='Em desenvolvimento:', value='/surv_build - Apresenta uma build de DBD para o survivor\n', inline=False)
+        
 
-        await ctx.send("```"+var+"```")
+        await ctx.send(embed=embed)
     except Exception as err:
         print(err)
-
-async def conectarBot(ctx):
-    if ctx.message.guild.voice_client != False:
-        if not (ctx.message.author.voice.channel=='Already connected to a voice channel.'):
-            await ctx.message.author.voice.channel.connect()
-        else:
-            ctx.send("aaaa")
-            return
-
-async def apresentarServer():
-    for guild in bot.guilds:
-        for channel in guild.text_channels :
-            if str(channel) == "bot" :
-                msgs = ['O bot está on!', 'O Pai tá on!', 'Alguém me chamou?!', 'SNAAAAAAAAAAAAAAAKEEEEE!']
-                gifs = ['hunters', 'dancing_dante','all_good_bb']
-                await channel.send('Status do bot: '+str(random.choice(msgs)))
-                await channel.send(file=discord.File('./gifs/'+str(random.choice(gifs)+'.gif')))
-                await channel.send('```Criador(a): {}\nServidor: {}\n\nQuantia de membros: {}\n```'.format(guild.owner, guild.name,guild.member_count))
+        
 
 if __name__ == "__main__" :
     bot.run(DISCORD_TOKEN)
