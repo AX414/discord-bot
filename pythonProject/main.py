@@ -189,11 +189,6 @@ async def apresentar(ctx):
         embed.description = var
         
         await ctx.send(file=file, embed=embed)
-        
-@bot.command(name='surv_build', help='Apresenta uma build de DBD para o survivor')
-async def surv_build(ctx):
-    print("a")
-
 
 @bot.command(name='help', help='Esta função exibe os comandos do bot')
 async def help(ctx):
@@ -220,6 +215,7 @@ async def help(ctx):
     except Exception as err:
         print(err)
         return
+    
 
 if __name__ == "__main__" :
     bot.run(DISCORD_TOKEN)
