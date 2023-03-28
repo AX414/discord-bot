@@ -75,36 +75,30 @@ async def on_ready():
 @bot.command(name='join', help='Chama o bot para o chat de voz')
 async def join(ctx):
     if not ctx.message.author.voice:
-        embed = discord.Embed()
-        embed.color = 2123412
-        embed.description = "{} não está conectado à um canal de voz".format(ctx.message.author.name)
+        embed = mensagem("","","","{} não está conectado à um canal de voz".format(ctx.message.author.name))
         await ctx.send(embed=embed)
         return
     else:
         voice_client = ctx.message.guild.voice_client
         if not voice_client:
-            embed = discord.Embed()
-            embed.color = 2123412
-            embed.description = "Conectando ao juntando ao canal de voz."
+            embed = mensagem("","","","Conectando ao canal de voz.")
             await ctx.send(embed=embed)
             
             channel = ctx.message.author.voice.channel
             await channel.connect()
         else:
-            embed = discord.Embed()
-            embed.color = 2123412
-            embed.description = "O bot já está conectado ao canal de voz."
+            embed = mensagem("","","","O bot já está conectado ao canal de voz.")
             await ctx.send(embed=embed)
 
 @bot.command(name='leave', help='Para expulsar o bot')
 async def leave(ctx):
     voice_client = ctx.message.guild.voice_client
     if voice_client.is_connected():
+        embed = mensagem("","","","Desconectando do canal de voz.")
+        await ctx.send(embed=embed)
         await voice_client.disconnect()
     else:
-        embed = discord.Embed()
-        embed.color = 2123412
-        embed.description = "O bot não está conectado à um canal de voz."
+        embed = mensagem("","","","O bot não está conectado à um canal de voz.")
         await ctx.send(embed=embed)
 
 @bot.command(name='play', help='Toca a musica especificada pela url em seguida')
@@ -136,15 +130,11 @@ async def play(ctx,url):
 async def pause(ctx):
     voice_client = ctx.message.guild.voice_client
     if voice_client.is_playing():
-        embed = discord.Embed()
-        embed.color = 2123412
-        embed.description = "Pausando a música."
+        embed = mensagem("","","","Pausando a música.")
         await ctx.send(embed=embed)
         await voice_client.pause()
     else:
-        embed = discord.Embed()
-        embed.color = 2123412
-        embed.description = "O bot não está tocando no momento."
+        embed = mensagem("","","","O bot não está tocando no momento.")
         await ctx.send(embed=embed)
     
 @bot.command(name='resume', help='Continua com a música')
@@ -152,20 +142,14 @@ async def resume(ctx):
     voice_client = ctx.message.guild.voice_client
     if voice_client:
         if voice_client.is_paused():
-            embed = discord.Embed()
-            embed.color = 2123412
-            embed.description = "Continuando com a música."
+            embed = mensagem("","","","Continuando com a música.")
             await ctx.send(embed=embed)
             voice_client.resume()
         else:
-            embed = discord.Embed()
-            embed.color = 2123412
-            embed.description = "O bot não tem nada para tocar."
+            embed = mensagem("","","","O bot não tem nada para tocar.")
             await ctx.send(embed=embed)
     else:
-        embed = discord.Embed()
-        embed.color = 2123412
-        embed.description = "O bot não está no canal de voz."
+        embed = mensagem("","","","O bot não está no canal de voz.")
         await ctx.send(embed=embed)
 
 
@@ -173,15 +157,11 @@ async def resume(ctx):
 async def stop(ctx):
     voice_client = ctx.message.guild.voice_client
     if voice_client.is_playing():
-        embed = discord.Embed()
-        embed.color = 2123412
-        embed.description = "Parando a música."
+        embed = mensagem("","","","Parando a música.")
         await ctx.send(embed=embed)
         await voice_client.stop()
     else:
-        embed = discord.Embed()
-        embed.color = 2123412
-        embed.description = "O bot não está tocando no momento."
+        embed = mensagem("","","","O bot não está tocando no momento.")
         await ctx.send(embed=embed)
 
 @bot.command(name='cavalo', help='CAVALO')
@@ -191,9 +171,7 @@ async def cavalo(ctx):
 
         voice_client = ctx.message.guild.voice_client
         if voice_client.is_playing():
-            embed = discord.Embed()
-            embed.color = 2123412
-            embed.description = "Parando a música."
+            embed = mensagem("","","","Parando a música.")
             await ctx.send(embed=embed)
             voice_client.stop()
 
@@ -204,9 +182,7 @@ async def cavalo(ctx):
         filename = await YTDLSource.from_url(url, loop=bot.loop)
         voice_channel.play(discord.FFmpegPCMAudio(filename, **ffmpeg_options))
 
-        embed = discord.Embed()
-        embed.color = 2123412
-        embed.description = '**CAVALO**'
+        embed = mensagem("","","",'**CAVALO**')
 
         await ctx.send(embed=embed)
     except Exception as err:
@@ -233,9 +209,7 @@ async def cavalo(ctx):
         filename = await YTDLSource.from_url(url, loop=bot.loop)            
         voice_channel.play(discord.FFmpegPCMAudio(filename, **ffmpeg_options))
 
-        embed = discord.Embed()
-        embed.color = 2123412
-        embed.description = '**RAPAAAAAIZZZZZZ**'
+        embed = mensagem("","","",'**RAPAAAAAIZZZZZZ**')
 
         await ctx.send(embed=embed)
     except Exception as err:
@@ -250,12 +224,13 @@ async def apresentar(ctx):
         file1 = discord.File('./gifs/'+str(random.choice(gifs)+'.gif'), filename='image.gif')
         file2 = discord.File('./icon.png', filename='icon.png')
 
-        embed = discord.Embed()
-        embed.color = 2123412
-        embed.title = 'Informações do server:'
-        embed.set_thumbnail(url='attachment://icon.png')
-        embed.set_image(url='attachment://image.gif')
-        embed.description = "\n\n*"+str(random.choice(msgs))+"*\n\n"
+        title = 'Informações do server:'
+        url1='attachment://icon.png'
+        url2='attachment://image.gif'
+        description = "\n\n*"+str(random.choice(msgs))+"*\n\n"
+
+        embed = mensagem(title,url1,url2,description)
+
         embed.add_field(name="Criador(a): ", value=str(ctx.guild.owner), inline=False)
         embed.add_field(name="Servidor: ", value=str(ctx.guild.name), inline=False)
         embed.add_field(name="Quantia de membros: ", value=str(ctx.guild.member_count), inline=False)
@@ -266,22 +241,21 @@ async def apresentar(ctx):
 async def help(ctx):
     try:
         
-        var ="/help - Esta função exibe os comandos do bot\n"
-        var+="/join - Chama o bot para o chat de voz\n"
-        var+="/play <url> - Toca a musica especificada pela url em seguida\n"
-        var+="/leave - Abandona o chat de voz\n"
-        var+="/pause - Pausa a música atual\n"
-        var+="/resume - Continua com a música\n"
-        var+="/stop - Para a música\n"
-        var+="/apresentar - Apresenta dados sobre o servidor\n"
+        description ="/help - Esta função exibe os comandos do bot\n"
+        description+="/join - Chama o bot para o chat de voz\n"
+        description+="/play <url> - Toca a musica especificada pela url em seguida\n"
+        description+="/leave - Abandona o chat de voz\n"
+        description+="/pause - Pausa a música atual\n"
+        description+="/resume - Continua com a música\n"
+        description+="/stop - Para a música\n"
+        description+="/apresentar - Apresenta dados sobre o servidor\n"
         
         file1 = discord.File('./icon.png', filename='icon.png')
-
-        embed = discord.Embed()
-        embed.color = 2123412
-        embed.title = 'Lista de Comandos:'
-        embed.set_thumbnail(url='attachment://icon.png')
-        embed.description = var
+        
+        title = 'Lista de Comandos:'
+        url = 'attachment://icon.png'
+        
+        embed = mensagem(title,url,"",description)
         embed.add_field(name='Em desenvolvimento:', value='/surv_build - Apresenta uma build de DBD para o survivor\n', inline=False)
         
 
@@ -289,7 +263,15 @@ async def help(ctx):
     except Exception as err:
         print(err)
         return
-    
+
+def mensagem(title,url1,url2,description):
+    embed = discord.Embed()
+    embed.color = 2123412
+    embed.title = title
+    embed.set_thumbnail(url=url1)
+    embed.set_image(url=url2)
+    embed.description = description
+    return embed
 
 if __name__ == "__main__" :
     bot.run(DISCORD_TOKEN)
