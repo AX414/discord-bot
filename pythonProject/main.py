@@ -269,6 +269,8 @@ async def help(ctx):
         description+='/resume - Continua com a música\n'
         description+='/stop - Para a música\n'
         description+='/apresentar - Apresenta dados sobre o servidor\n'
+        description+='/surv_build - Apresenta uma build de DBD para o sobrevivente'
+        description+='/killer_build - Apresenta uma build de DBD para o killer'
         
         file1 = discord.File('./images/icon.png', filename='icon.png')
         
@@ -276,8 +278,6 @@ async def help(ctx):
         url = 'attachment://icon.png'
         
         embed = mensagem(title,url,"",description)
-        embed.add_field(name='Em desenvolvimento:', value='/surv_build - Apresenta uma build de DBD para o survivor\n', inline=False)
-        
 
         await ctx.send(files=[file1], embed=embed)
     except Exception as err:
