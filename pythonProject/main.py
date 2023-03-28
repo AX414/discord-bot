@@ -4,6 +4,7 @@ import asyncio
 import ffmpeg
 import random
 import json
+from deep_translator import GoogleTranslator
 import yt_dlp as youtube_dl
 from dotenv import load_dotenv
 from discord.ext import commands,tasks
@@ -191,7 +192,7 @@ async def cavalo(ctx):
         server = ctx.message.guild
         voice_channel = server.voice_client
 
-        filename = await YTDLSource.from_url(url, loop=bot.loop)
+        filename = await YTDLSource.from_url(url, loop=bot.loop, ctx=ctx)
         voice_channel.play(discord.FFmpegPCMAudio(filename, **ffmpeg_options))
 
         embed = mensagem("","","",'**CAVALO**')
@@ -218,7 +219,7 @@ async def cavalo(ctx):
         server = ctx.message.guild
         voice_channel = server.voice_client
 
-        filename = await YTDLSource.from_url(url, loop=bot.loop)            
+        filename = await YTDLSource.from_url(url, loop=bot.loop, ctx=ctx)            
         voice_channel.play(discord.FFmpegPCMAudio(filename, **ffmpeg_options))
 
         embed = mensagem("","","",'**RAPAAAAAIZZZZZZ**')
@@ -234,11 +235,12 @@ async def apresentar(ctx):
         gifs = ['hunters', 'dancing_dante','all_good_bb','ghostface1']
 
         file1 = discord.File('./images/gifs/'+str(random.choice(gifs)+'.gif'), filename='image.gif')
-        file2 = discord.File('./images/icon.png', filename='icon.png')
+        file2 = discord.File('./images/survivor.png', filename='survivor.png')
 
         title = 'Informações do server:'
-        url1='attachment://icon.png'
+        url1='attachment://survivor.png'
         url2='attachment://image.gif'
+
         description = "\n\n*"+str(random.choice(msgs))+"*\n\n"
 
         embed = mensagem(title,url1,url2,description)
@@ -249,13 +251,25 @@ async def apresentar(ctx):
         
         await ctx.send(files=[file1,file2], embed=embed)
 
+@bot.command(name='info', help='Apresenta uma build de DBD para o killer')
+async def info(ctx,arg):
+    await info(ctx,arg)
+
 @bot.command(name='surv_build', help='Apresenta uma build de DBD para o survivor')
 async def surv_build(ctx):
-    await randomizar("Survivor",'survivor',ctx)
+    await randomizar(ctx,"Survivor","survivor")
 
 @bot.command(name='killer_build', help='Apresenta uma build de DBD para o killer')
 async def surv_build(ctx):
-    await randomizar("Killer",'killer',ctx)
+    await randomizar(ctx,"Killer","killer")
+
+@bot.command(name='all_survs', help='Apresenta todos os sobreviventes')
+async def all_killers(ctx):
+    await apresentarTodos(ctx,"survivor")
+
+@bot.command(name='all_killers', help='Apresenta todos os killers')
+async def all_killers(ctx):
+    await apresentarTodos(ctx,"killer")
 
 @bot.command(name='help', help='Esta função exibe os comandos do bot')
 async def help(ctx):
@@ -263,19 +277,22 @@ async def help(ctx):
         
         description ='/help - Esta função exibe os comandos do bot\n'
         description+='/join - Chama o bot para o chat de voz\n'
-        description+='/play <url> ou "titulo" - Toca a musica especificada pela url em seguida\n'
+        description+='/play <url> ou "pesquisa" - Toca a musica especificada pela url em seguida\n'
         description+='/leave - Abandona o chat de voz\n'
         description+='/pause - Pausa a música atual\n'
         description+='/resume - Continua com a música\n'
         description+='/stop - Para a música\n'
-        description+='/apresentar - Apresenta dados sobre o servidor\n'
+        description+='/apresentar - Apresenta dados sobre o servidor\n\n\n**Funções do DBD:**\n'
+        description+='/info "Nome correto do personagem" - Apresenta informações do personagem especificado\n'
         description+='/surv_build - Apresenta uma build de DBD para o sobrevivente\n'
         description+='/killer_build - Apresenta uma build de DBD para o killer\n'
+        description+='/all_survs - Apresenta todos os sobreviventes\n'
+        description+='/all_killers - Apresenta todos os killers\n'
         
-        file1 = discord.File('./images/icon.png', filename='icon.png')
+        file1 = discord.File('./images/survivor.png', filename='survivor.png')
         
         title = 'Lista de Comandos:'
-        url = 'attachment://icon.png'
+        url = 'attachment://survivor.png'
         
         embed = mensagem(title,url,"",description)
 
@@ -293,17 +310,57 @@ def mensagem(title,url1,url2,description):
     embed.description = description
     return embed
 
-async def randomizar(role,arg,ctx):
-    arquivo1= open('./jsons/characters.json', "r")
+async def info(ctx,arg):
+    arquivo1= open('./jsons/characters2.json', "r")
+    characters = json.loads(arquivo1.read())
+
+    try:
+        achou = False
+        for value in characters.values():
+            if value['name'] == str(arg):
+                achou = True
+            
+                bio = '{}'.format(value['bio'])
+
+                bio_traduzida = GoogleTranslator(source='auto', target='pt').translate(bio)
+
+                embed = mensagem("Informações de {}:".format(value['name']),"","","")
+
+                url = value['image']
+                if url.startswith('h'):
+                    embed.set_image(url=value['image'])
+
+                embed.add_field(name="Bio:", value="{}".format(bio_traduzida), inline = False)
+                await ctx.send(embed = embed)
+                return
+            else:
+                achou = False
+    except Exception:
+        embed = mensagem("","","","Infelizmente o discord não permite mensagens muito grandes.")
+        return
+    
+    if achou is False:
+        embed = mensagem("","","","Não encontrei dados sobre esse personagem.")
+        await ctx.send(embed = embed)
+
+async def randomizar(ctx,role,arg):
+    arquivo1= open('./jsons/characters2.json', "r")
     characters = json.loads(arquivo1.read())
 
     arquivo2 = open('./jsons/perks.json', "r")
     perks = json.loads(arquivo2.read())
 
     lista = []
+    url = ''
     for value in characters.values():
         if value['role'] == str(arg):
             lista.append(value)
+            if value['role'] == 'killer':
+                file = discord.File('./images/killer.png', filename='icon.png')
+            elif value['role'] == 'survivor':
+                file = discord.File('./images/survivor.png', filename='icon.png')
+                
+    url = 'attachment://icon.png'
 
     i = 0
     personagem = str(random.choice(lista)['name'])
@@ -322,22 +379,31 @@ async def randomizar(role,arg,ctx):
     perk4 = random.choice(habilidades)
     habilidades.remove(perk4)
 
-    if arg == 'killer':
-        file = discord.File('./images/killer.png', filename='killer.png')
-        url = 'attachment://killer.png'
-    elif arg == 'survivor':
-        file = discord.File('./images/survivor.png', filename='survivor.png')
-        url = 'attachment://survivor.png'
+    d1 = GoogleTranslator(source='auto', target='pt').translate(perk1['name'])
+    d2 = GoogleTranslator(source='auto', target='pt').translate(perk2['name'])
+    d3 = GoogleTranslator(source='auto', target='pt').translate(perk3['name'])
+    d4 = GoogleTranslator(source='auto', target='pt').translate(perk4['name'])
     
-
     embed = mensagem("Build do {}:".format(role),"","","Personagem: {}".format(personagem))
-    embed.set_thumbnail(url = url)
-    embed.add_field(name="{}".format(perk1['name']), value="", inline = False)
-    embed.add_field(name="{}".format(perk2['name']), value="", inline = False)
-    embed.add_field(name="{}".format(perk3['name']), value="", inline = False)
-    embed.add_field(name="{}".format(perk4['name']), value="", inline = False)
+    embed.set_thumbnail(url=url)
 
+    embed.add_field(name="\n{}".format(perk1['name']), value="Tradução: "+d1, inline = False)
+    embed.add_field(name="\n{}".format(perk2['name']), value="Tradução: "+d2, inline = False)
+    embed.add_field(name="\n{}".format(perk3['name']), value="Tradução: "+d3, inline = False)
+    embed.add_field(name="\n{}".format(perk4['name']), value="Tradução: "+d4, inline = False)
 
+    await ctx.send(files=[file], embed = embed)
+
+async def apresentarTodos(ctx, role):
+    arquivo1= open('./jsons/characters2.json', "r")
+    characters = json.loads(arquivo1.read())
+
+    var = ""
+    for value in characters.values():
+        if value['role'] == str(role):
+            var += value['name']+"\n"
+
+    embed = mensagem("Apresentando todos os {}:".format(role),"","","{}".format(var))
     await ctx.send(embed = embed)
 
 if __name__ == "__main__" :
