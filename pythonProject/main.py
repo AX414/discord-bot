@@ -38,6 +38,8 @@ ffmpeg_options = {'options': '-vn'}
 
 ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
 
+titulo_video = ''
+
 class YTDLSource(discord.PCMVolumeTransformer):
     def __init__(self, source, *, data, volume=0.7):
         super().__init__(source, volume)
@@ -46,13 +48,21 @@ class YTDLSource(discord.PCMVolumeTransformer):
         self.url = ""
 
     @classmethod
-    async def from_url(cls, url, *, loop=None, stream=False):
+    async def from_url(cls, url, *, loop=None, stream=False,ctx):
         loop = loop or asyncio.get_event_loop()
         data = await loop.run_in_executor(None, lambda: ytdl.extract_info(url, download=not stream))
         if 'entries' in data:
             # take first item from a playlist
             data = data['entries'][0]
         filename = data['title'] if stream else ytdl.prepare_filename(data)
+
+        titulo_video = str(data['title'])
+        embed = discord.Embed()
+        embed.color = 2123412
+        embed.description = "**Título:  **"+titulo_video
+
+        await ctx.send(embed=embed)
+        
         return filename
 
 # Remove o comando de ajuda padrão, eu decidi criar o meu próprio
@@ -65,15 +75,26 @@ async def on_ready():
 @bot.command(name='join', help='Chama o bot para o chat de voz')
 async def join(ctx):
     if not ctx.message.author.voice:
-        await ctx.send("{} não está conectado à um canal de voz".format(ctx.message.author.name))
+        embed = discord.Embed()
+        embed.color = 2123412
+        embed.description = "{} não está conectado à um canal de voz".format(ctx.message.author.name)
+        await ctx.send(embed=embed)
         return
     else:
         voice_client = ctx.message.guild.voice_client
         if not voice_client:
+            embed = discord.Embed()
+            embed.color = 2123412
+            embed.description = "Conectando ao juntando ao canal de voz."
+            await ctx.send(embed=embed)
+            
             channel = ctx.message.author.voice.channel
             await channel.connect()
         else:
-            await ctx.send("O bot já está conectado ao canal de voz.")
+            embed = discord.Embed()
+            embed.color = 2123412
+            embed.description = "O bot já está conectado ao canal de voz."
+            await ctx.send(embed=embed)
 
 @bot.command(name='leave', help='Para expulsar o bot')
 async def leave(ctx):
@@ -81,7 +102,10 @@ async def leave(ctx):
     if voice_client.is_connected():
         await voice_client.disconnect()
     else:
-        await ctx.send("O bot não está conectado à um canal de voz.")
+        embed = discord.Embed()
+        embed.color = 2123412
+        embed.description = "O bot não está conectado à um canal de voz."
+        await ctx.send(embed=embed)
 
 @bot.command(name='play', help='Toca a musica especificada pela url em seguida')
 async def play(ctx,url):
@@ -97,13 +121,12 @@ async def play(ctx,url):
         server = ctx.message.guild
         voice_channel = server.voice_client
 
-        filename = await YTDLSource.from_url(url, loop=bot.loop)
+        filename = await YTDLSource.from_url(url, loop=bot.loop,ctx=ctx)
         
         #windows: "C:\\ffmpeg\\bin\\ffmpeg.exe"                
         #voice_channel.play(discord.FFmpegPCMAudio(executable="caminho", source=filename))
         
         voice_channel.play(discord.FFmpegPCMAudio(filename, **ffmpeg_options))
-        await ctx.send('Tocando a música selecionada')
 
     except Exception as err:
         print(err)
@@ -113,25 +136,53 @@ async def play(ctx,url):
 async def pause(ctx):
     voice_client = ctx.message.guild.voice_client
     if voice_client.is_playing():
+        embed = discord.Embed()
+        embed.color = 2123412
+        embed.description = "Pausando a música."
+        await ctx.send(embed=embed)
         await voice_client.pause()
     else:
-        await ctx.send("O bot não está tocando no momento.")
+        embed = discord.Embed()
+        embed.color = 2123412
+        embed.description = "O bot não está tocando no momento."
+        await ctx.send(embed=embed)
     
 @bot.command(name='resume', help='Continua com a música')
 async def resume(ctx):
     voice_client = ctx.message.guild.voice_client
-    if voice_client.is_paused():
-        voice_client.resume()
+    if voice_client:
+        if voice_client.is_paused():
+            embed = discord.Embed()
+            embed.color = 2123412
+            embed.description = "Continuando com a música."
+            await ctx.send(embed=embed)
+            voice_client.resume()
+        else:
+            embed = discord.Embed()
+            embed.color = 2123412
+            embed.description = "O bot não tem nada para tocar."
+            await ctx.send(embed=embed)
     else:
-        await ctx.send("O bot não tem nada para tocar")
+        embed = discord.Embed()
+        embed.color = 2123412
+        embed.description = "O bot não está no canal de voz."
+        await ctx.send(embed=embed)
+
 
 @bot.command(name='stop', help='Para a música')
 async def stop(ctx):
     voice_client = ctx.message.guild.voice_client
     if voice_client.is_playing():
+        embed = discord.Embed()
+        embed.color = 2123412
+        embed.description = "Parando a música."
+        await ctx.send(embed=embed)
         await voice_client.stop()
     else:
-        await ctx.send("O bot não está tocando no momento.")
+        embed = discord.Embed()
+        embed.color = 2123412
+        embed.description = "O bot não está tocando no momento."
+        await ctx.send(embed=embed)
 
 @bot.command(name='cavalo', help='CAVALO')
 async def cavalo(ctx):
@@ -140,6 +191,10 @@ async def cavalo(ctx):
 
         voice_client = ctx.message.guild.voice_client
         if voice_client.is_playing():
+            embed = discord.Embed()
+            embed.color = 2123412
+            embed.description = "Parando a música."
+            await ctx.send(embed=embed)
             voice_client.stop()
 
         url = 'https://www.youtube.com/watch?v=1xzGPPxKgJM'
@@ -149,7 +204,11 @@ async def cavalo(ctx):
         filename = await YTDLSource.from_url(url, loop=bot.loop)
         voice_channel.play(discord.FFmpegPCMAudio(filename, **ffmpeg_options))
 
-        await ctx.send('**CAVALO**')
+        embed = discord.Embed()
+        embed.color = 2123412
+        embed.description = '**CAVALO**'
+
+        await ctx.send(embed=embed)
     except Exception as err:
         print(err)
         return
@@ -161,6 +220,10 @@ async def cavalo(ctx):
         
         voice_client = ctx.message.guild.voice_client
         if voice_client.is_playing():
+            embed = discord.Embed()
+            embed.color = 2123412
+            embed.description = "Parando a música."
+            await ctx.send(embed=embed)
             voice_client.stop()
 
         url = 'https://www.youtube.com/watch?v=HXYNW0ft5o4'
@@ -170,7 +233,11 @@ async def cavalo(ctx):
         filename = await YTDLSource.from_url(url, loop=bot.loop)            
         voice_channel.play(discord.FFmpegPCMAudio(filename, **ffmpeg_options))
 
-        await ctx.send('**RAPAAAAAIZZZZZZ**')
+        embed = discord.Embed()
+        embed.color = 2123412
+        embed.description = '**RAPAAAAAIZZZZZZ**'
+
+        await ctx.send(embed=embed)
     except Exception as err:
         print(err)
         return
@@ -178,23 +245,28 @@ async def cavalo(ctx):
 @bot.command(name='apresentar', help='Apresenta dados sobre o servidor')
 async def apresentar(ctx):
         msgs = ['O bot está on!', 'O Pai tá on!', 'Alguém me chamou?!', 'Opa eae!']
-        gifs = ['hunters', 'dancing_dante','all_good_bb']
-        var = str(random.choice(msgs))+'\n\nCriador(a): {}\nServidor: {}\nQuantia de membros: {}\n'.format(ctx.guild.owner, ctx.guild.name,ctx.guild.member_count)
-        file = discord.File('./gifs/'+str(random.choice(gifs)+'.gif'), filename='image.gif')
+        gifs = ['hunters', 'dancing_dante','all_good_bb','ghostface1']
+
+        file1 = discord.File('./gifs/'+str(random.choice(gifs)+'.gif'), filename='image.gif')
+        file2 = discord.File('./icon.png', filename='icon.png')
 
         embed = discord.Embed()
         embed.color = 2123412
-        embed.title = 'Apresentando informações do server:'
-        embed.set_thumbnail(url='attachment://image.gif')
-        embed.description = var
+        embed.title = 'Informações do server:'
+        embed.set_thumbnail(url='attachment://icon.png')
+        embed.set_image(url='attachment://image.gif')
+        embed.description = "\n\n*"+str(random.choice(msgs))+"*\n\n"
+        embed.add_field(name="Criador(a): ", value=str(ctx.guild.owner), inline=False)
+        embed.add_field(name="Servidor: ", value=str(ctx.guild.name), inline=False)
+        embed.add_field(name="Quantia de membros: ", value=str(ctx.guild.member_count), inline=False)
         
-        await ctx.send(file=file, embed=embed)
+        await ctx.send(files=[file1,file2], embed=embed)
 
 @bot.command(name='help', help='Esta função exibe os comandos do bot')
 async def help(ctx):
     try:
         
-        var="/help - Esta função exibe os comandos do bot\n"
+        var ="/help - Esta função exibe os comandos do bot\n"
         var+="/join - Chama o bot para o chat de voz\n"
         var+="/play <url> - Toca a musica especificada pela url em seguida\n"
         var+="/leave - Abandona o chat de voz\n"
@@ -202,16 +274,18 @@ async def help(ctx):
         var+="/resume - Continua com a música\n"
         var+="/stop - Para a música\n"
         var+="/apresentar - Apresenta dados sobre o servidor\n"
-        var+="\n"
         
+        file1 = discord.File('./icon.png', filename='icon.png')
+
         embed = discord.Embed()
         embed.color = 2123412
         embed.title = 'Lista de Comandos:'
+        embed.set_thumbnail(url='attachment://icon.png')
         embed.description = var
         embed.add_field(name='Em desenvolvimento:', value='/surv_build - Apresenta uma build de DBD para o survivor\n', inline=False)
         
 
-        await ctx.send(embed=embed)
+        await ctx.send(files=[file1], embed=embed)
     except Exception as err:
         print(err)
         return
