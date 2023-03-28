@@ -4,11 +4,8 @@ import random
 
 url = "https://dbd.tricky.lol/api/"
 
-<<<<<<< HEAD
-
 nomes = ['dwight', 'claudette','meg']
-=======
->>>>>>> refs/remotes/origin/main
+
 r1 = requests.get(url+"characterinfo?character="+random.choice(nomes))
 r2 = requests.get(url+"randomperks?(role=survivor&pretty)/")
 
@@ -30,4 +27,4 @@ dictionary = data
 for value in dictionary.values():
     prkn = value['name']
     prki = value['image']
-    print(p1n+"\n"+p1i)
+    print(prkn+"\n"+prki)

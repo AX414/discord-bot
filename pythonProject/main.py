@@ -58,17 +58,14 @@ class YTDLSource(discord.PCMVolumeTransformer):
         filename = data['title'] if stream else ytdl.prepare_filename(data)
 
         titulo_video = str(data['title'])
-<<<<<<< HEAD
         video = str(data['url'])
         #ainda dá para adicionar mais coisas
 
         embed = mensagem("","",video,"**Título:  **"+titulo_video)
-=======
         imagem = str(data['thumbnail'])
         #ainda dá para adicionar mais coisas
 
         embed = mensagem("","",imagem,"**Título:  **"+titulo_video)
->>>>>>> refs/remotes/origin/main
         await ctx.send(embed=embed)
         
         return filename
@@ -239,13 +236,13 @@ async def apresentar(ctx):
         msgs = ['O bot está on!', 'O Pai tá on!', 'Alguém me chamou?!', 'Opa eae!']
         gifs = ['hunters', 'dancing_dante','all_good_bb','ghostface1']
 
-<<<<<<< HEAD
+
         file1 = discord.File('.images/gifs/'+str(random.choice(gifs)+'.gif'), filename='image.gif')
         file2 = discord.File('.images/icon.png', filename='icon.png')
-=======
+
         file1 = discord.File('./gifs/'+str(random.choice(gifs)+'.gif'), filename='image.gif')
         file2 = discord.File('./icon.png', filename='icon.png')
->>>>>>> refs/remotes/origin/main
+
 
         title = 'Informações do server:'
         url1='attachment://icon.png'
