@@ -93,12 +93,16 @@ async def join(ctx):
 @bot.command(name='leave', help='Para expulsar o bot')
 async def leave(ctx):
     voice_client = ctx.message.guild.voice_client
-    if voice_client.is_connected():
-        embed = mensagem("","","","Desconectando do canal de voz.")
-        await ctx.send(embed=embed)
-        await voice_client.disconnect()
+    if voice_client:
+        if voice_client.is_connected():
+            embed = mensagem("","","","Desconectando do canal de voz.")
+            await ctx.send(embed=embed)
+            await voice_client.disconnect()
+        else:
+            embed = mensagem("","","","O bot não está conectado à um canal de voz.")
+            await ctx.send(embed=embed)
     else:
-        embed = mensagem("","","","O bot não está conectado à um canal de voz.")
+        embed = mensagem("","","","O bot não está no canal de voz.")
         await ctx.send(embed=embed)
 
 @bot.command(name='play', help='Toca a musica especificada pela url em seguida')
@@ -129,12 +133,16 @@ async def play(ctx,url):
 @bot.command(name='pause', help='Pausa a música atual')
 async def pause(ctx):
     voice_client = ctx.message.guild.voice_client
-    if voice_client.is_playing():
-        embed = mensagem("","","","Pausando a música.")
-        await ctx.send(embed=embed)
-        await voice_client.pause()
+    if voice_client:
+        if voice_client.is_playing():
+            embed = mensagem("","","","Pausando a música.")
+            await ctx.send(embed=embed)
+            await voice_client.pause()
+        else:
+            embed = mensagem("","","","O bot não está tocando no momento.")
+            await ctx.send(embed=embed)
     else:
-        embed = mensagem("","","","O bot não está tocando no momento.")
+        embed = mensagem("","","","O bot não está no canal de voz.")
         await ctx.send(embed=embed)
     
 @bot.command(name='resume', help='Continua com a música')
@@ -156,12 +164,16 @@ async def resume(ctx):
 @bot.command(name='stop', help='Para a música')
 async def stop(ctx):
     voice_client = ctx.message.guild.voice_client
-    if voice_client.is_playing():
-        embed = mensagem("","","","Parando a música.")
-        await ctx.send(embed=embed)
-        await voice_client.stop()
+    if voice_client:
+        if voice_client.is_playing():
+            embed = mensagem("","","","Parando a música.")
+            await ctx.send(embed=embed)
+            await voice_client.stop()
+        else:
+            embed = mensagem("","","","O bot não está tocando no momento.")
+            await ctx.send(embed=embed)
     else:
-        embed = mensagem("","","","O bot não está tocando no momento.")
+        embed = mensagem("","","","O bot não está no canal de voz.")
         await ctx.send(embed=embed)
 
 @bot.command(name='cavalo', help='CAVALO')
@@ -241,14 +253,14 @@ async def apresentar(ctx):
 async def help(ctx):
     try:
         
-        description ="/help - Esta função exibe os comandos do bot\n"
-        description+="/join - Chama o bot para o chat de voz\n"
-        description+="/play <url> - Toca a musica especificada pela url em seguida\n"
-        description+="/leave - Abandona o chat de voz\n"
-        description+="/pause - Pausa a música atual\n"
-        description+="/resume - Continua com a música\n"
-        description+="/stop - Para a música\n"
-        description+="/apresentar - Apresenta dados sobre o servidor\n"
+        description ='/help - Esta função exibe os comandos do bot\n'
+        description+='/join - Chama o bot para o chat de voz\n'
+        description+='/play <url> ou "titulo" - Toca a musica especificada pela url em seguida\n'
+        description+='/leave - Abandona o chat de voz\n'
+        description+='/pause - Pausa a música atual\n'
+        description+='/resume - Continua com a música\n'
+        description+='/stop - Para a música\n'
+        description+='/apresentar - Apresenta dados sobre o servidor\n'
         
         file1 = discord.File('./icon.png', filename='icon.png')
         
