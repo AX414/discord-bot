@@ -319,7 +319,7 @@ async def info(ctx,arg):
         for value in characters.values():
             if value['name'] == str(arg):
                 achou = True
-            
+                
                 bio = '{}'.format(value['bio'])
 
                 bio_traduzida = GoogleTranslator(source='auto', target='pt').translate(bio)

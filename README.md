@@ -1,10 +1,10 @@
 # Discord bot
 
 <center>
-  <img style="border-radius: 25px" src="https://cdn.discordapp.com/app-icons/1089378822228549733/5951771c6f5575cf87d4130d35f06ca0.png?size=256"/>
+  <img src="https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/8/86/FulliconFavors_ebonyMementoMori.png/revision/latest?cb=20200821203851"/>
 </center>
 
-Este é um bot de discord que desenvolvi utilizando python, admito que foi bem divertido testar ele junto de meus amigos, principalmente porque eu sempre usei exemplos nem um pouco ortodoxos pra testes.
+Este é um bot de discord que desenvolvi utilizando python.
 
 Ainda falta fazer o deploy dele com um container docker, mas isso é algo que vou arrumando com o tempo. Enquanto eu não fazer isso, ele não vai estar ativo em muitos momentos pois depende de mim para ele estar online. Além disso ainda tenho que adicionar uma estrutura de dados de uma fila pra adicionar as músicas, é bem melhor assim do que ter que tocar uma música por vez.
 
