@@ -269,8 +269,8 @@ async def help(ctx):
         description+='/resume - Continua com a música\n'
         description+='/stop - Para a música\n'
         description+='/apresentar - Apresenta dados sobre o servidor\n'
-        description+='/surv_build - Apresenta uma build de DBD para o sobrevivente'
-        description+='/killer_build - Apresenta uma build de DBD para o killer'
+        description+='/surv_build - Apresenta uma build de DBD para o sobrevivente\n'
+        description+='/killer_build - Apresenta uma build de DBD para o killer\n'
         
         file1 = discord.File('./images/icon.png', filename='icon.png')
         
