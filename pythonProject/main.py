@@ -45,6 +45,7 @@ class YTDLSource(discord.PCMVolumeTransformer):
         super().__init__(source, volume)
         self.data = data
         self.title = data.get('title')
+        self.thumbnail = data.get('thumbnail')
         self.url = ""
 
     @classmethod
@@ -57,10 +58,10 @@ class YTDLSource(discord.PCMVolumeTransformer):
         filename = data['title'] if stream else ytdl.prepare_filename(data)
 
         titulo_video = str(data['title'])
-        embed = discord.Embed()
-        embed.color = 2123412
-        embed.description = "**Título:  **"+titulo_video
+        imagem = str(data['thumbnail'])
+        #ainda dá para adicionar mais coisas
 
+        embed = mensagem("","",imagem,"**Título:  **"+titulo_video)
         await ctx.send(embed=embed)
         
         return filename
@@ -110,22 +111,20 @@ async def play(ctx,url):
     try :
         # Conecta o bot se não estiver conectado
         await join(ctx)
-
         # Se outra pessoa pedir para tocar, ele vai imediatamente
         voice_client = ctx.message.guild.voice_client
         if voice_client.is_playing():
             voice_client.stop()
-
+        
         server = ctx.message.guild
         voice_channel = server.voice_client
 
         filename = await YTDLSource.from_url(url, loop=bot.loop,ctx=ctx)
-        
+            
         #windows: "C:\\ffmpeg\\bin\\ffmpeg.exe"                
         #voice_channel.play(discord.FFmpegPCMAudio(executable="caminho", source=filename))
-        
-        voice_channel.play(discord.FFmpegPCMAudio(filename, **ffmpeg_options))
 
+        voice_channel.play(discord.FFmpegPCMAudio(filename, **ffmpeg_options))
     except Exception as err:
         print(err)
         return
