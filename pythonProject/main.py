@@ -3,6 +3,7 @@ import os
 import asyncio
 import ffmpeg
 import random
+import json
 import yt_dlp as youtube_dl
 from dotenv import load_dotenv
 from discord.ext import commands,tasks
@@ -58,10 +59,6 @@ class YTDLSource(discord.PCMVolumeTransformer):
         filename = data['title'] if stream else ytdl.prepare_filename(data)
 
         titulo_video = str(data['title'])
-        video = str(data['url'])
-        #ainda dá para adicionar mais coisas
-
-        embed = mensagem("","",video,"**Título:  **"+titulo_video)
         imagem = str(data['thumbnail'])
         #ainda dá para adicionar mais coisas
 
@@ -236,13 +233,8 @@ async def apresentar(ctx):
         msgs = ['O bot está on!', 'O Pai tá on!', 'Alguém me chamou?!', 'Opa eae!']
         gifs = ['hunters', 'dancing_dante','all_good_bb','ghostface1']
 
-
-        file1 = discord.File('.images/gifs/'+str(random.choice(gifs)+'.gif'), filename='image.gif')
-        file2 = discord.File('.images/icon.png', filename='icon.png')
-
-        file1 = discord.File('./gifs/'+str(random.choice(gifs)+'.gif'), filename='image.gif')
-        file2 = discord.File('./icon.png', filename='icon.png')
-
+        file1 = discord.File('./images/gifs/'+str(random.choice(gifs)+'.gif'), filename='image.gif')
+        file2 = discord.File('./images/icon.png', filename='icon.png')
 
         title = 'Informações do server:'
         url1='attachment://icon.png'
@@ -257,6 +249,14 @@ async def apresentar(ctx):
         
         await ctx.send(files=[file1,file2], embed=embed)
 
+@bot.command(name='surv_build', help='Apresenta uma build de DBD para o survivor')
+async def surv_build(ctx):
+    await randomizar("Survivor",'survivor',ctx)
+
+@bot.command(name='killer_build', help='Apresenta uma build de DBD para o killer')
+async def surv_build(ctx):
+    await randomizar("Killer",'killer',ctx)
+
 @bot.command(name='help', help='Esta função exibe os comandos do bot')
 async def help(ctx):
     try:
@@ -270,7 +270,7 @@ async def help(ctx):
         description+='/stop - Para a música\n'
         description+='/apresentar - Apresenta dados sobre o servidor\n'
         
-        file1 = discord.File('./icon.png', filename='icon.png')
+        file1 = discord.File('./images/icon.png', filename='icon.png')
         
         title = 'Lista de Comandos:'
         url = 'attachment://icon.png'
@@ -292,6 +292,53 @@ def mensagem(title,url1,url2,description):
     embed.set_image(url=url2)
     embed.description = description
     return embed
+
+async def randomizar(role,arg,ctx):
+    arquivo1= open('./jsons/characters.json', "r")
+    characters = json.loads(arquivo1.read())
+
+    arquivo2 = open('./jsons/perks.json', "r")
+    perks = json.loads(arquivo2.read())
+
+    lista = []
+    for value in characters.values():
+        if value['role'] == str(arg):
+            lista.append(value)
+
+    i = 0
+    personagem = str(random.choice(lista)['name'])
+    habilidades = []
+
+    for value in perks.values():
+        if value['role'] == str(arg):
+            habilidades.append(value)
+
+    perk1 = random.choice(habilidades)
+    habilidades.remove(perk1)
+    perk2 = random.choice(habilidades)
+    habilidades.remove(perk2)
+    perk3 = random.choice(habilidades)
+    habilidades.remove(perk3) 
+    perk4 = random.choice(habilidades)
+    habilidades.remove(perk4)
+
+    if arg == 'killer':
+        file = discord.File('./images/killer.png', filename='killer.png')
+        url = 'attachment://killer.png'
+    elif arg == 'survivor':
+        file = discord.File('./images/survivor.png', filename='survivor.png')
+        url = 'attachment://survivor.png'
+    
+
+    embed = mensagem("Build do {}:".format(role),"","","Personagem: {}".format(personagem))
+    embed.set_thumbnail(url = url)
+    embed.add_field(name="{}".format(perk1['name']), value="", inline = False)
+    embed.add_field(name="{}".format(perk2['name']), value="", inline = False)
+    embed.add_field(name="{}".format(perk3['name']), value="", inline = False)
+    embed.add_field(name="{}".format(perk4['name']), value="", inline = False)
+
+
+    await ctx.send(embed = embed)
 
 if __name__ == "__main__" :
     bot.run(DISCORD_TOKEN)

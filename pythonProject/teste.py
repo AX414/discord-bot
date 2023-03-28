@@ -2,29 +2,61 @@ import requests
 import json
 import random
 
-url = "https://dbd.tricky.lol/api/"
+#url = "https://dbd.tricky.lol/api/"
 
-nomes = ['dwight', 'claudette','meg']
+#nomes_survs = ['dwight', 'claudette','meg']
 
-r1 = requests.get(url+"characterinfo?character="+random.choice(nomes))
-r2 = requests.get(url+"randomperks?(role=survivor&pretty)/")
+#r1 = requests.get(url+"characterinfo?role=survivor&character="+random.choice(nomes_survs))
+#r2 = requests.get(url+"randomperks?(role=survivor&pretty)/")
 
-print(f"Response R1: {r1.json()}\n\n")
 
 # Pegar indice do personagem
-print(f"Index: {r1.json()['index']}")
+#print(f"Index: {r1.json()['index']}")
 
 # Pegar nome do personagem
-print(f"Nome: {r1.json()['name']}")
+#print(f"Nome: {r1.json()['name']}")
 
 # Pegando as perks randomicas
-print(f"\n\nResponse R2: {r2.json()}\n\n")
+#print(f"\n\nResponse R2: {r2.json()}\n\n")
 
 
-print("\n\n\n")
-data = r2.json()
-dictionary = data
-for value in dictionary.values():
-    prkn = value['name']
-    prki = value['image']
-    print(prkn+"\n"+prki)
+#print("\n\n\n")
+#data = r2.json()
+#dictionary = data
+#for value in dictionary.values():
+#    prkn = value['name']
+#    prki = value['image']
+#    print(prkn+"\n"+prki)
+
+
+arquivo1= open('./jsons/characters.json', "r")
+characters = json.loads(arquivo1.read())
+
+arquivo2 = open('./jsons/perks.json', "r")
+perks = json.loads(arquivo2.read())
+
+
+# Retorna dwight
+print(f"Resposta: \n\n{characters['0']['name']}\n\n")
+
+print("\n\nApresenta todos os survivors:\n\n")
+for value in characters.values():
+    if value['role'] == 'survivor':
+        print(value['name'])
+
+print("\n\nApresenta todos os killers:\n\n")
+for value in characters.values():
+    if value['role'] == 'killer':
+        print(value['name'])
+
+print("\n\nApresenta todas as perks dos survivors:\n\n")
+for value in perks.values():
+        if value['role'] == 'survivor':
+            print(value['name'])
+
+print("\n\nApresenta todas as perks dos killers:\n\n")
+for value in perks.values():
+        if value['role'] == 'killer':
+            print(value['name'])
+
+
