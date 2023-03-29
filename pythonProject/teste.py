@@ -29,10 +29,10 @@ import random
 #    print(prkn+"\n"+prki)
 
 
-arquivo1= open('./jsons/characters.json', "r")
+arquivo1= open('./jsons/characters.json', encoding="utf8")
 characters = json.loads(arquivo1.read())
 
-arquivo2 = open('./jsons/perks.json', "r")
+arquivo2 = open('./jsons/perks.json', encoding="utf8")
 perks = json.loads(arquivo2.read())
 
 
