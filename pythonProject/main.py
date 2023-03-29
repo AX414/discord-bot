@@ -338,7 +338,7 @@ def mensagem(title,url1,url2,description):
     return embed
 
 async def info(ctx,arg):
-    arquivo1= open('./jsons/characters2.json', "r")
+    arquivo1= open('./jsons/characters2.json', encoding="utf8")
     characters = json.loads(arquivo1.read())
 
     try:
@@ -371,10 +371,10 @@ async def info(ctx,arg):
         await ctx.send(embed = embed)
 
 async def randomizar(ctx,role,arg):
-    arquivo1= open('./jsons/characters2.json', "r")
+    arquivo1= open('./jsons/characters2.json', encoding="utf8")
     characters = json.loads(arquivo1.read())
 
-    arquivo2 = open('./jsons/perks.json', "r")
+    arquivo2 = open('./jsons/perks.json', encoding="utf8")
     perks = json.loads(arquivo2.read())
 
     lista = []
@@ -422,7 +422,7 @@ async def randomizar(ctx,role,arg):
     await ctx.send(files=[file], embed = embed)
 
 async def apresentarTodos(ctx, role):
-    arquivo1= open('./jsons/characters2.json', "r")
+    arquivo1= open('./jsons/characters2.json', encoding="utf8")
     characters = json.loads(arquivo1.read())
 
     var = ""
