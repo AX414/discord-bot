@@ -105,7 +105,7 @@
     "LS_Legs01"
     ],
     "dlc": "halloween",
-    "image": "UI/Icons/CharPortraits/DLC2/LS_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/9/90/New_Store_Laurie.png/revision/latest/scale-to-width-down/213?cb=20220325045515.png"
     },
     "6": {
     "id": "Ace",
@@ -321,7 +321,7 @@
     "QF_Legs01"
     ],
     "dlc": "Qatar",
-    "image": "UI/Icons/CharPortraits/Qatar/QF_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/1e/New_Store_Nancy.png/revision/latest/scale-to-width-down/179?cb=20220618144446.png"
     },
     "18": {
     "id": "Steve",
@@ -339,7 +339,7 @@
     "QM_Legs01"
     ],
     "dlc": "Qatar",
-    "image": "UI/Icons/CharPortraits/Qatar/QM_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/0f/New_Store_Steve.png/revision/latest/scale-to-width-down/275?cb=20220618144437.png"
     },
     "19": {
     "id": "Yui",
@@ -357,7 +357,7 @@
     "SwedenSurvivor_Legs01"
     ],
     "dlc": "Sweden",
-    "image": "UI/Icons/CharPortraits/Sweden/SS_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/0b/New_Store_Yui.png/revision/latest/scale-to-width-down/206?cb=20220325045607.png"
     },
     "20": {
     "id": "Zarina",
@@ -375,7 +375,7 @@
     "US_Legs01"
     ],
     "dlc": "Ukraine",
-    "image": "UI/Icons/CharPortraits/Ukraine/US_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/6/61/New_Store_Zarina.png/revision/latest/scale-to-width-down/229?cb=20220325045629.png"
     },
     "21": {
     "id": "S22",
@@ -393,7 +393,7 @@
     "S22_Legs01"
     ],
     "dlc": "Wales",
-    "image": "UI/Icons/CharPortraits/Wales/S22_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/7/78/New_Store_Cheryl.png/revision/latest/scale-to-width-down/211?cb=20220325045254.png"
     },
     "22": {
     "id": "S23",
@@ -411,7 +411,7 @@
     "S23_Legs01"
     ],
     "dlc": "Yemen",
-    "image": "UI/Icons/CharPortraits/Yemen/S23_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/8/88/New_Store_Felix.png/revision/latest/scale-to-width-down/289?cb=20220621144237.png"
     },
     "23": {
     "id": "S24",
@@ -429,7 +429,7 @@
     "S24_Legs01"
     ],
     "dlc": "Aurora",
-    "image": "UI/Icons/CharPortraits/Aurora/S24_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/3/37/New_Store_Elodie.png/revision/latest/scale-to-width-down/220?cb=20220325045411.png"
     },
     "24": {
     "id": "S25",
@@ -447,7 +447,7 @@
     "S25_Legs01"
     ],
     "dlc": "Comet",
-    "image": "UI/Icons/CharPortraits/Comet/S25_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/f/fd/New_Store_Yun-Jin.png/revision/latest/scale-to-width-down/255?cb=20220325045618.png"
     },
     "25": {
     "id": "S26",
@@ -465,7 +465,7 @@
     "S26_Legs01"
     ],
     "dlc": "Eclipse",
-    "image": "UI/Icons/CharPortraits/Eclipse/S26_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/f/fb/New_Store_Jill.png/revision/latest/scale-to-width-down/213?cb=20220618144709.png"
     },
     "26": {
     "id": "S27",
@@ -483,7 +483,7 @@
     "S27_Legs01"
     ],
     "dlc": "Eclipse",
-    "image": "UI/Icons/CharPortraits/Eclipse/S27_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/b/b3/New_Store_Leon.png/revision/latest/scale-to-width-down/256?cb=20220618144716.png"
     },
     "27": {
     "id": "S28",
@@ -501,7 +501,7 @@
     "S28_Legs01"
     ],
     "dlc": "Hubble",
-    "image": "UI/Icons/CharPortraits/Hubble/S28_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/e/ed/New_Store_Mikaela.png/revision/latest/scale-to-width-down/325?cb=20220618144730.png"
     },
     "28": {
     "id": "S29",
@@ -519,7 +519,7 @@
     "S29_Legs01"
     ],
     "dlc": "Ion",
-    "image": "UI/Icons/CharPortraits/Ion/T_S29_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/07/New_Store_Jonah.png/revision/latest/scale-to-width-down/252?cb=20220618144723.png"
     },
     "29": {
     "id": "S30",
@@ -537,7 +537,7 @@
     "S30_Legs01"
     ],
     "dlc": "Kepler",
-    "image": "UI/Icons/CharPortraits/Kepler/S30_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/f/f3/New_Store_Yoichi.png/revision/latest/scale-to-width-down/278?cb=20220618144736.png"
     },
     "30": {
     "id": "S31",
@@ -555,7 +555,7 @@
     "S31_Legs01"
     ],
     "dlc": "Meteor",
-    "image": "UI/Icons/CharPortraits/Meteor/S31_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/6/65/New_Store_Haddie.png/revision/latest/scale-to-width-down/195?cb=20220607191731.png"
     },
     "31": {
     "id": "S32",
@@ -573,7 +573,7 @@
     "S32_Legs01"
     ],
     "dlc": "Orion",
-    "image": "UI/Icons/CharPortraits/Orion/S32_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/d/d3/New_Store_Ada.png/revision/latest/scale-to-width-down/170?cb=20220830161534.png"
     },
     "32": {
     "id": "S33",
@@ -591,7 +591,7 @@
     "S33_Legs01"
     ],
     "dlc": "Orion",
-    "image": "UI/Icons/CharPortraits/Orion/S33_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/c/c3/New_Store_Rebecca.png/revision/latest/scale-to-width-down/281?cb=20220830161525.png"
     },
     "33": {
     "id": "S34",
@@ -609,7 +609,7 @@
     "S34_Legs01"
     ],
     "dlc": "Quantum",
-    "image": "UI/Icons/CharPortraits/Quantum/S34_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/f/f2/Store_Vittorio.png/revision/latest/scale-to-width-down/251?cb=20221122173820.png"
     },
     "34": {
     "id": "S35",
@@ -627,7 +627,7 @@
     "S35_Legs01"
     ],
     "dlc": "Saturn",
-    "image": "UI/Icons/CharPortraits/Saturn/s35_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/9/91/Store_Thalita.png/revision/latest/scale-to-width-down/214?cb=20230308040648.png"
     },
     "35": {
     "id": "S36",
@@ -645,7 +645,7 @@
     "S36_Legs01"
     ],
     "dlc": "Saturn",
-    "image": "UI/Icons/CharPortraits/Saturn/S36_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/16/Store_Renato.png/revision/latest/scale-to-width-down/188?cb=20230308040632.png"
     },
     "268435456": {
     "id": "Chuckles",
@@ -790,7 +790,7 @@
     "HA_Claw01"
     ],
     "dlc": "fleshAndMud",
-    "image": "UI/Icons/CharPortraits/DLC3/HA_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/a5/New_Store_Hag.png/revision/latest/scale-to-width-down/265?cb=20220618153657.png"
     },
     "268435461": {
     "id": "Shape",
@@ -838,7 +838,7 @@
     "MM_Knife01"
     ],
     "dlc": "halloween",
-    "image": "UI/Icons/CharPortraits/DLC2/SH_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/3/33/New_Store_Shape.png/revision/latest/scale-to-width-down/307?cb=20220325045914.png"
     },
     "268435462": {
     "id": "Killer07",
@@ -887,7 +887,7 @@
     "DO_Weapon01"
     ],
     "dlc": "sparkofMadness",
-    "image": "UI/Icons/CharPortraits/DLC4/DO_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/f/f1/New_Store_Doctor.png/revision/latest/scale-to-width-down/333?cb=20220325045656.png"
     },
     "268435463": {
     "id": "Bear",
@@ -953,7 +953,7 @@
     "CA_W01"
     ],
     "dlc": "Cannibal",
-    "image": "UI/Icons/CharPortraits/Cannibal/CA_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/e/e8/New_Store_Cannibal.png/revision/latest/scale-to-width-down/435?cb=20220618153640.png"
     },
     "268435465": {
     "id": "Nightmare",
@@ -1000,7 +1000,7 @@
     "SD_W01"
     ],
     "dlc": "Sandman",
-    "image": "UI/Icons/CharPortraits/England/SD_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/d/d3/New_Store_Nightmare.png/revision/latest/scale-to-width-down/252?cb=20220618153703.png"
     },
     "268435466": {
     "id": "Pig",
@@ -1032,7 +1032,7 @@
     "FK_W01"
     ],
     "dlc": "Finland",
-    "image": "UI/Icons/CharPortraits/Finland/FK_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/c/c9/New_Store_Pig.png/revision/latest/scale-to-width-down/240?cb=20220325045841.png"
     },
     "268435467": {
     "id": "Clown",
@@ -1090,7 +1090,7 @@
     "GK_W01"
     ],
     "dlc": "Guam",
-    "image": "UI/Icons/CharPortraits/Guam/GK_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/7/7a/New_Store_Clown.png/revision/latest/scale-to-width-down/346?cb=20220325045646.png"
     },
     "268435468": {
     "id": "Spirit",
@@ -1123,7 +1123,7 @@
     "HK_W01"
     ],
     "dlc": "Haiti",
-    "image": "UI/Icons/CharPortraits/Haiti/HK_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/44/New_Store_Spirit.png/revision/latest/scale-to-width-down/322?cb=20220325045927.png"
     },
     "268435469": {
     "id": "Legion",
@@ -1165,7 +1165,7 @@
     "KK_W01"
     ],
     "dlc": "Kenya",
-    "image": "UI/Icons/CharPortraits/Kenya/KK_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/8/8d/New_Store_Legion.png/revision/latest/scale-to-width-down/229?cb=20220325045750.png"
     },
     "268435470": {
     "id": "Plague",
@@ -1219,7 +1219,7 @@
     "MK_W01"
     ],
     "dlc": "Mali",
-    "image": "UI/Icons/CharPortraits/Mali/MK_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/d/d8/New_Store_Plague.png/revision/latest/scale-to-width-down/269?cb=20220325045854.png"
     },
     "268435471": {
     "id": "Ghostface",
@@ -1272,7 +1272,7 @@
     "OK_W01"
     ],
     "dlc": "Oman",
-    "image": "UI/Icons/CharPortraits/Oman/OK_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/e/ed/New_Store_Ghostface.png/revision/latest/scale-to-width-down/605?cb=20220325045719.png"
     },
     "268435472": {
     "id": "Demogorgon",
@@ -1324,7 +1324,7 @@
     "QK_W01"
     ],
     "dlc": "Qatar",
-    "image": "UI/Icons/CharPortraits/Qatar/QK_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/d/d4/New_Store_Demogorgon.png/revision/latest/scale-to-width-down/323?cb=20220817104354.png"
     },
     "268435473": {
     "id": "Oni",
@@ -1465,7 +1465,7 @@
     "UkraineKiller_W01"
     ],
     "dlc": "Ukraine",
-    "image": "UI/Icons/CharPortraits/Ukraine/UK_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/1c/New_Store_Deathslinger.png/revision/latest/scale-to-width-down/297?cb=20220618153651.png"
     },
     "268435475": {
     "id": "K20",
@@ -1584,7 +1584,7 @@
     "K21_Weapon01"
     ],
     "dlc": "Yemen",
-    "image": "UI/Icons/CharPortraits/Yemen/K21_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/e/e1/New_Store_Blight.png/revision/latest/scale-to-width-down/321?cb=20220618153633.png"
     },
     "268435477": {
     "id": "K22",
@@ -1648,7 +1648,7 @@
     "K22_Weapon01"
     ],
     "dlc": "Aurora",
-    "image": "UI/Icons/CharPortraits/Aurora/K22_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/b/bc/New_Store_Twins.png/revision/latest/scale-to-width-down/240?cb=20220618153714.png"
     },
     "268435478": {
     "id": "K23",
@@ -1718,7 +1718,7 @@
     "K23_Weapon01"
     ],
     "dlc": "Comet",
-    "image": "UI/Icons/CharPortraits/Comet/K23_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/4c/New_Store_Trickster.png/revision/latest/scale-to-width-down/341?cb=20220618153708.png"
     },
     "268435479": {
     "id": "K24",
@@ -1788,7 +1788,7 @@
     "K24_Weapon01"
     ],
     "dlc": "Eclipse",
-    "image": "UI/Icons/CharPortraits/Eclipse/K24_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/16/New_Store_Nemesis.png/revision/latest/scale-to-width-down/334?cb=20220618155504.png"
     },
     "268435480": {
     "id": "K25",
@@ -1859,7 +1859,7 @@
     "K25_Weapon01"
     ],
     "dlc": "Gemini",
-    "image": "UI/Icons/CharPortraits/Gemini/K25_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/9/97/New_Store_Cenobite.png/revision/latest/scale-to-width-down/212?cb=20220618153646.png"
     },
     "268435481": {
     "id": "K26",
@@ -1953,7 +1953,7 @@
     "K26_W01"
     ],
     "dlc": "Ion",
-    "image": "UI/Icons/CharPortraits/Ion/T_K26_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/7/77/New_Store_Artist.png/revision/latest/scale-to-width-down/492?cb=20220618153628.png"
     },
     "268435482": {
     "id": "K27",
@@ -2011,7 +2011,7 @@
     "K27_Weapon01"
     ],
     "dlc": "Kepler",
-    "image": "UI/Icons/CharPortraits/Kepler/K27_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/08/New_Store_Onryo.png/revision/latest/scale-to-width-down/200?cb=20220618155147"
     },
     "268435483": {
     "id": "K28",
@@ -2074,7 +2074,7 @@
     "K28_Weapon01"
     ],
     "dlc": "Meteor",
-    "image": "UI/Icons/CharPortraits/Meteor/K28_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/07/New_Store_Dredge.png/revision/latest/scale-to-width-down/280?cb=20220607191722.png"
     },
     "268435484": {
     "id": "K29",
@@ -2163,7 +2163,7 @@
     "K29_Weapon01"
     ],
     "dlc": "Orion",
-    "image": "UI/Icons/CharPortraits/Orion/K29_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/05/New_Store_Mastermind.png/revision/latest/scale-to-width-down/380?cb=20220830161543.png"
     },
     "268435485": {
     "id": "K30",
@@ -2208,7 +2208,7 @@
     "K30_Weapon01"
     ],
     "dlc": "Quantum",
-    "image": "UI/Icons/CharPortraits/Quantum/K30_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/7/73/Store_Knight.png/revision/latest/scale-to-width-down/254?cb=20221122173834.png"
     },
     "268435486": {
     "id": "K31",
@@ -2278,6 +2278,6 @@
     "K31_Weapon01"
     ],
     "dlc": "Saturn",
-    "image": "UI/Icons/CharPortraits/Saturn/K31_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/af/Store_Skull_Merchant.png/revision/latest/scale-to-width-down/364?cb=20230308040704.png"
     }
     }
