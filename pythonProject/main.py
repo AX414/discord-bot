@@ -386,11 +386,13 @@ async def randomizar(ctx,role,arg):
                 file = discord.File('./images/killer.png', filename='icon.png')
             elif value['role'] == 'survivor':
                 file = discord.File('./images/survivor.png', filename='icon.png')
-                
-    url = 'attachment://icon.png'
+
+
+
+    url_thumb = 'attachment://icon.png'
 
     i = 0
-    personagem = str(random.choice(lista)['name'])
+    personagem = (random.choice(lista))
     habilidades = []
 
     for value in perks.values():
@@ -411,8 +413,10 @@ async def randomizar(ctx,role,arg):
     d3 = GoogleTranslator(source='auto', target='pt').translate(perk3['name'])
     d4 = GoogleTranslator(source='auto', target='pt').translate(perk4['name'])
     
-    embed = mensagem("Build do {}:".format(role),"","","Personagem: {}".format(personagem))
-    embed.set_thumbnail(url=url)
+    embed = mensagem("Build do {}:".format(role),"","","Personagem: {}".format(personagem['name']))
+    embed.set_thumbnail(url=url_thumb)
+
+    embed.set_image(url=personagem['image'])
 
     embed.add_field(name="\n{}".format(perk1['name']), value="Tradução: "+d1, inline = False)
     embed.add_field(name="\n{}".format(perk2['name']), value="Tradução: "+d2, inline = False)
