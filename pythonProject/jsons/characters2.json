@@ -51,7 +51,7 @@
     "C_Legs01"
     ],
     "dlc": null,
-    "image": "UI/Icons/CharPortraits/CM_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/3/3f/New_Store_Claudette.png/revision/latest/scale-to-width-down/204?cb=20220325045338.png"
     },
     "3": {
     "id": "Jake",
@@ -69,7 +69,7 @@
     "J_Legs01"
     ],
     "dlc": null,
-    "image": "UI/Icons/CharPortraits/JP_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/04/New_Store_Jake.png/revision/latest/scale-to-width-down/257?cb=20220325045435.png"
     },
     "4": {
     "id": "Nea",
@@ -87,7 +87,7 @@
     "N_Legs01"
     ],
     "dlc": null,
-    "image": "UI/Icons/CharPortraits/NK_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/b/ba/New_Store_Nea.png/revision/latest/scale-to-width-down/199?cb=20220325045534.png"
     },
     "5": {
     "id": "Laurie",
@@ -123,7 +123,7 @@
     "AV_Legs01"
     ],
     "dlc": "fleshAndMud",
-    "image": "UI/Icons/CharPortraits/DLC3/AV_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/9/90/New_Store_Laurie.png/revision/latest/scale-to-width-down/213?cb=20220325045515.png"
     },
     "7": {
     "id": "Bill",
@@ -159,7 +159,7 @@
     "FM_Legs01"
     ],
     "dlc": "sparkofMadness",
-    "image": "UI/Icons/CharPortraits/DLC4/FM_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/d/d9/New_Store_Feng.png/revision/latest/scale-to-width-down/203?cb=20220325045426.png"
     },
     "9": {
     "id": "Smoke",
@@ -177,7 +177,7 @@
     "DK_Legs01"
     ],
     "dlc": "boreal",
-    "image": "UI/Icons/CharPortraits/DLC5/DK_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/f/f5/New_Store_David.png/revision/latest/scale-to-width-down/289?cb=20220325045347.png"
     },
     "10": {
     "id": "Kate",
@@ -195,7 +195,7 @@
     "GS_Legs01"
     ],
     "dlc": "Guam",
-    "image": "UI/Icons/CharPortraits/Guam/GS_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/0f/New_Store_Kate.png/revision/latest/scale-to-width-down/187?cb=20220325045505.png"
     },
     "11": {
     "id": "Quentin",
@@ -213,7 +213,7 @@
     "QS_Legs01"
     ],
     "dlc": "Sandman",
-    "image": "UI/Icons/CharPortraits/England/QS_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/3/31/New_Store_Quentin.png/revision/latest/scale-to-width-down/233?cb=20220325045543.png"
     },
     "12": {
     "id": "Eric",
@@ -231,7 +231,7 @@
     "FS_Legs01"
     ],
     "dlc": "Finland",
-    "image": "UI/Icons/CharPortraits/Finland/FS_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/7/71/New_Store_Tapp.png/revision/latest/scale-to-width-down/277?cb=20220325045550.png"
     },
     "13": {
     "id": "Adam",
@@ -249,7 +249,7 @@
     "HS_Legs01"
     ],
     "dlc": "Haiti",
-    "image": "UI/Icons/CharPortraits/Haiti/AF_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/05/New_Store_Adam.png/revision/latest/scale-to-width-down/245?cb=20220325045225.png"
     },
     "14": {
     "id": "Jeff",
@@ -267,7 +267,7 @@
     "KS_Legs01"
     ],
     "dlc": "Kenya",
-    "image": "UI/Icons/CharPortraits/Kenya/KS_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/7/7d/New_Store_Jeff.png/revision/latest/scale-to-width-down/272?cb=20220325045454.png"
     },
     "15": {
     "id": "Jane",
@@ -285,7 +285,7 @@
     "MS_Legs01"
     ],
     "dlc": "Mali",
-    "image": "UI/Icons/CharPortraits/Mali/MS_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/f/f4/New_Store_Jane.png/revision/latest/scale-to-width-down/330?cb=20220325045446.png"
     },
     "16": {
     "id": "Ash",
@@ -303,7 +303,7 @@
     "ML_Legs01"
     ],
     "dlc": "Nepals",
-    "image": "UI/Icons/CharPortraits/Ash/MS2_charSelect_portrait.png"
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/43/New_Store_Ash.png/revision/latest/scale-to-width-down/291?cb=20220325045235.png"
     },
     "17": {
     "id": "Nancy",

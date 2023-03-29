@@ -11,8 +11,10 @@ from discord.ext import commands,tasks
 
 load_dotenv()
 
-# Get the API token from the .env file.
-DISCORD_TOKEN = os.getenv("discord_token")
+DISCORD_TOKEN = os.getenv('MORI')
+
+print(DISCORD_TOKEN)
+
 
 intents = discord.Intents().all()
 client = discord.Client(intents=intents)
