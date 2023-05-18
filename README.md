@@ -1,11 +1,13 @@
-# Discord bot
+# Mori - Um bot do Discord sobre Dead by Daylight:
 
 <center>
   <img src="https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/8/86/FulliconFavors_ebonyMementoMori.png/revision/latest?cb=20200821203851"/>
-</center>
 
-Este é um bot de discord que desenvolvi utilizando python.
 
-Ainda falta fazer o deploy dele com um container docker, mas isso é algo que vou arrumando com o tempo. Enquanto eu não fazer isso, ele não vai estar ativo em muitos momentos pois depende de mim para ele estar online. Além disso ainda tenho que adicionar uma estrutura de dados de uma fila pra adicionar as músicas, é bem melhor assim do que ter que tocar uma música por vez.
+Este é um bot de discord que desenvolvi utilizando python, ele oferece funções relacionadas ao jogo "[Dead By Daylight](https://deadbydaylight.com/)", suas funções podem ser vistas utilizando o comando "/help".
 
-De qualquer forma, aqui está o link para inserir ele no seu servidor se quiser: [link](https://discord.com/oauth2/authorize?client_id=1089378822228549733&permissions=8&scope=bot)
+Para executar ele, é necessário instalar as bibliotecas utilizadas pelo python criar um bot no developer portal seguindo conforme o passo 1 e 2 desta apresentação [aqui](https://ax414.github.io/pokedex-discord-bot) e utilizar o token fornecido pelo portal para utilizá-lo no arquivo ".env". Depois disso basta utilizar o link de convite para convidá-lo para seu servidor e executar o script "main.py".
+
+<video width="320" height="240" controls>
+  <source src="[video.mov](https://assets.deadbydaylight.com/AM_3335_DBD_Newkey_Art_ANIM_v4_515b9fe264_1_5f327de69a.mp4)" type="video/mp4">
+</video>
