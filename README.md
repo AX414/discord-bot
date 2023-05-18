@@ -13,15 +13,10 @@ Para executar ele, é necessário instalar as bibliotecas utilizadas pelo python
 
 # Screenshots:
 
-| | |
-|:-------------------------:|:-------------------------:|
-|<img src="https://github.com/AX414/mori-discord-bot/blob/main/images/img2.png?raw=true"/>|<img src="https://github.com/AX414/mori-discord-bot/blob/main/images/img3.png?raw=true"/>|
-|<img src="https://github.com/AX414/mori-discord-bot/blob/main/images/img4.png?raw=true"/>|<img src="https://github.com/AX414/mori-discord-bot/blob/main/images/img5.png?raw=true"/>|
-
-
-
-
-
-
-
-
+<p align="center">
+<table>
+  <tr><th>/all_survs e /all_killer</th>           <th>/surv_build e /killer_build</th></tr>
+  <tr><td><img src="https://github.com/AX414/mori-discord-bot/blob/main/images/img2.png?raw=true"/></td><td><img src="https://github.com/AX414/mori-discord-bot/blob/main/images/img4.png?raw=true"/></td></tr>
+  <tr><td><img src="https://github.com/AX414/mori-discord-bot/blob/main/images/img3.png?raw=true"/></td><td><img src="https://github.com/AX414/mori-discord-bot/blob/main/images/img5.png?raw=true"/></td></tr>
+</table>
+</p>
