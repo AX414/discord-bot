@@ -50,7 +50,9 @@ class YTDLSource(discord.PCMVolumeTransformer):
         self.data = data
         self.title = data.get('title')
         self.thumbnail = data.get('thumbnail')
-        self.url = ""
+        self.duration_string = data.get('duration_string')
+        self.original_url = data.get('original_url')
+        self.channel = data.get('channel')
 
     @classmethod
     async def from_url(cls, url, *, loop=None, stream=False,ctx):
@@ -63,11 +65,15 @@ class YTDLSource(discord.PCMVolumeTransformer):
 
         titulo_video = str(data['title'])
         imagem = str(data['thumbnail'])
-        #ainda dá para adicionar mais coisas
+        duracao = str(data['duration_string'])
+        url = str(data['original_url'])
+        canal = str(data['channel'])
+	#ainda dá para adicionar mais coisas
 
-        embed = mensagem("","",imagem,"**Título:  **"+titulo_video)
+        embed = mensagem("","",imagem,f"**Título:**{titulo_video}\n**Canal:** {canal}\n**Duração: **{duracao}")
+        embed.set_footer(text=f"URL: {url}")
         await ctx.send(embed=embed)
-        
+
         return filename
 
 # Remove o comando de ajuda padrão, eu decidi criar o meu próprio
@@ -208,7 +214,7 @@ async def cavalo(ctx):
 async def cavalo(ctx):
     try :
         await join(ctx)
-        
+
         voice_client = ctx.message.guild.voice_client
         if voice_client.is_playing():
             embed = discord.Embed()
@@ -250,7 +256,6 @@ async def apresentar(ctx):
         embed.add_field(name="Criador(a): ", value=str(ctx.guild.owner), inline=False)
         embed.add_field(name="Servidor: ", value=str(ctx.guild.name), inline=False)
         embed.add_field(name="Quantia de membros: ", value=str(ctx.guild.member_count), inline=False)
-        
         await ctx.send(files=[file1,file2], embed=embed)
 
 @bot.command(name='info', help='Apresenta uma build de DBD para o killer')
@@ -392,6 +397,7 @@ async def randomizar(ctx,role,arg):
     url_thumb = 'attachment://icon.png'
 
     i = 0
+    random.seed(random.randint(0, 100000))
     personagem = (random.choice(lista))
     habilidades = []
 
