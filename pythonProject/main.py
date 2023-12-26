@@ -132,9 +132,9 @@ async def play(ctx,url):
         filename = await YTDLSource.from_url(url, loop=bot.loop,ctx=ctx)
             
         #windows: "C:\\ffmpeg\\bin\\ffmpeg.exe"                
-        #voice_channel.play(discord.FFmpegPCMAudio(executable="caminho", source=filename))
+        voice_channel.play(discord.FFmpegPCMAudio(executable="C:\\ffmpeg\\bin\\ffmpeg.exe", source=filename))
 
-        voice_channel.play(discord.FFmpegPCMAudio(filename, **ffmpeg_options))
+        #voice_channel.play(discord.FFmpegPCMAudio(filename, **ffmpeg_options))
     except Exception as err:
         print(err)
         return
@@ -185,96 +185,53 @@ async def stop(ctx):
         embed = mensagem("","","","O bot não está no canal de voz.")
         await ctx.send(embed=embed)
 
-@bot.command(name='cavalo', help='CAVALO')
-async def cavalo(ctx):
-    try :
-        await join(ctx)
-
-        voice_client = ctx.message.guild.voice_client
-        if voice_client.is_playing():
-            embed = mensagem("","","","Parando a música.")
-            await ctx.send(embed=embed)
-            voice_client.stop()
-
-        url = 'https://www.youtube.com/watch?v=1xzGPPxKgJM'
-        server = ctx.message.guild
-        voice_channel = server.voice_client
-
-        filename = await YTDLSource.from_url(url, loop=bot.loop, ctx=ctx)
-        voice_channel.play(discord.FFmpegPCMAudio(filename, **ffmpeg_options))
-
-        embed = mensagem("","","",'**CAVALO**')
-
-        await ctx.send(embed=embed)
-    except Exception as err:
-        print(err)
-        return
-
-@bot.command(name='rapaiz', help='RAPAAAAAIZZZZZZ')
-async def cavalo(ctx):
-    try :
-        await join(ctx)
-
-        voice_client = ctx.message.guild.voice_client
-        if voice_client.is_playing():
-            embed = discord.Embed()
-            embed.color = 2123412
-            embed.description = "Parando a música."
-            await ctx.send(embed=embed)
-            voice_client.stop()
-
-        url = 'https://www.youtube.com/watch?v=HXYNW0ft5o4'
-        server = ctx.message.guild
-        voice_channel = server.voice_client
-
-        filename = await YTDLSource.from_url(url, loop=bot.loop, ctx=ctx)            
-        voice_channel.play(discord.FFmpegPCMAudio(filename, **ffmpeg_options))
-
-        embed = mensagem("","","",'**RAPAAAAAIZZZZZZ**')
-
-        await ctx.send(embed=embed)
-    except Exception as err:
-        print(err)
-        return
-
 @bot.command(name='apresentar', help='Apresenta dados sobre o servidor')
 async def apresentar(ctx):
-        msgs = ['O bot está on!', 'O Pai tá on!', 'Alguém me chamou?!', 'Opa eae!']
-        gifs = ['dancing_dante','all_good_bb','ghostface1']
+    msgs = [
+        'Você entregou a alma pro diabo assim que vacilou comigo.\n(Caleb Quinn)',
+        'Temos que trabalhar como um time. Eu preciso que vocês sobrevivam para que eu possa sobreviver!\n(Dwight Fairfield)',
+        'Conhecimento básico de botânica poderia salvar sua vida um dia.\n(Claudette Morel)',
+        'Prestar atenção é o que me manteve vivo ao longo dos anos. Isso e minha boa aparência, é claro.\n(Ace Visconti)'
+    ]
+    
+    gifs_folder = './images/gifs/'
+    gifs = [f for f in os.listdir(gifs_folder) if f.endswith('.gif')]
 
-        file1 = discord.File('./images/gifs/'+str(random.choice(gifs)+'.gif'), filename='image.gif')
-        file2 = discord.File('./images/survivor.png', filename='survivor.png')
+    chosen_gif = random.choice(gifs)
+    file1 = discord.File(os.path.join(gifs_folder, chosen_gif), filename='image.gif')
+    file2 = discord.File('./images/survivor.png', filename='survivor.png')
 
-        title = 'Informações do server:'
-        url1='attachment://survivor.png'
-        url2='attachment://image.gif'
+    title = 'Informações do server:'
+    url1 = 'attachment://survivor.png'
+    url2 = 'attachment://image.gif'
 
-        description = "\n\n*"+str(random.choice(msgs))+"*\n\n"
+    description = "\n\n*" + random.choice(msgs) + "*\n\n"
 
-        embed = mensagem(title,url1,url2,description)
+    embed = mensagem(title, url1, url2, description)
 
-        embed.add_field(name="Criador(a): ", value=str(ctx.guild.owner), inline=False)
-        embed.add_field(name="Servidor: ", value=str(ctx.guild.name), inline=False)
-        embed.add_field(name="Quantia de membros: ", value=str(ctx.guild.member_count), inline=False)
-        await ctx.send(files=[file1,file2], embed=embed)
+    embed.add_field(name="Criador(a): ", value=str(ctx.guild.owner), inline=False)
+    embed.add_field(name="Servidor: ", value=str(ctx.guild.name), inline=False)
+    embed.add_field(name="Quantia de membros: ", value=str(ctx.guild.member_count), inline=False)
+
+    await ctx.send(files=[file1, file2], embed=embed)
 
 @bot.command(name='info', help='Apresenta uma build de DBD para o killer')
 async def info(ctx,arg):
     await info(ctx,arg)
 
-@bot.command(name='surv_build', help='Apresenta uma build de DBD para o survivor')
+@bot.command(name='sb', help='Apresenta uma build de DBD para o survivor')
 async def surv_build(ctx):
     await randomizar(ctx,"Survivor","survivor")
 
-@bot.command(name='killer_build', help='Apresenta uma build de DBD para o killer')
-async def surv_build(ctx):
+@bot.command(name='kb', help='Apresenta uma build de DBD para o killer')
+async def killer_build(ctx):
     await randomizar(ctx,"Killer","killer")
 
-@bot.command(name='all_survs', help='Apresenta todos os sobreviventes')
+@bot.command(name='alls', help='Apresenta todos os sobreviventes')
 async def all_killers(ctx):
     await apresentarTodos(ctx,"survivor")
 
-@bot.command(name='all_killers', help='Apresenta todos os killers')
+@bot.command(name='allk', help='Apresenta todos os killers')
 async def all_killers(ctx):
     await apresentarTodos(ctx,"killer")
 
@@ -291,10 +248,10 @@ async def help(ctx):
         description+='/stop - Para a música\n'
         description+='/apresentar - Apresenta dados sobre o servidor\n\n\n**Funções do DBD:**\n'
         description+='/info "Nome correto do personagem" - Apresenta informações do personagem especificado\n'
-        description+='/surv_build - Apresenta uma build de DBD para o sobrevivente\n'
-        description+='/killer_build - Apresenta uma build de DBD para o killer\n'
-        description+='/all_survs - Apresenta todos os sobreviventes\n'
-        description+='/all_killers - Apresenta todos os killers\n'
+        description+='/sb - Apresenta uma build de DBD para o sobrevivente\n'
+        description+='/kb - Apresenta uma build de DBD para o killer\n'
+        description+='/alls - Apresenta todos os sobreviventes\n'
+        description+='/allk - Apresenta todos os killers\n'
         
         file1 = discord.File('./images/survivor.png', filename='survivor.png')
         
@@ -391,8 +348,6 @@ async def randomizar(ctx,role,arg):
                 file = discord.File('./images/killer.png', filename='icon.png')
             elif value['role'] == 'survivor':
                 file = discord.File('./images/survivor.png', filename='icon.png')
-
-
 
     url_thumb = 'attachment://icon.png'
 
