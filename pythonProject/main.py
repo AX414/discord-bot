@@ -7,6 +7,7 @@ from deep_translator import GoogleTranslator
 import yt_dlp as youtube_dl
 from dotenv import load_dotenv
 from discord.ext import commands
+from fuzzywuzzy import process, fuzz  # Add this line
 
 load_dotenv()
 

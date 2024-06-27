@@ -1,0 +1,9 @@
+discord.py
+requests
+asyncio
+yt-dlp
+deep-translator
+python-dotenv
+PyNaCl
+ffmpeg
+fuzzywuzzy
