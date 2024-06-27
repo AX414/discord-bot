@@ -3,30 +3,39 @@ import json
 import random
 
 url = "https://dbd.tricky.lol/api/"
+char = requests.get(url+"randomcharacter/")
+perks = requests.get(url+"randomperks?(role=survivor&pretty)/")
+print(f"Personagem: {char.json()['name']}")
+print("Perks: ")
+dictionary = perks.json()
+for value in dictionary.values():
+    print(value['name']+"\n"+value['image'])
+      
 
-nomes_survs = ['dwight', 'claudette','meg']
+### Testes antigos que eu usava jsons.
+#nomes_survs = ['dwight', 'claudette','meg']
 
-r1 = requests.get(url+"characterinfo?role=survivor&character="+random.choice(nomes_survs))
-r2 = requests.get(url+"randomperks?(role=survivor&pretty)/")
+#r1 = requests.get(url+"characterinfo?role=survivor&character="+random.choice(nomes_survs))
+#r2 = requests.get(url+"randomperks?(role=survivor&pretty)/")
 
 
 # Pegar indice do personagem
-print(f"Index: {r1.json()['index']}")
+#print(f"Index: {r1.json()['index']}")
 
 # Pegar nome do personagem
-print(f"Nome: {r1.json()['name']}")
+#print(f"Nome: {r1.json()['name']}")
 
 # Pegando as perks randomicas
-print(f"\n\nResponse R2: {r2.json()}\n\n")
+#print(f"\n\nResponse R2: {r2.json()}\n\n")
 
 
-print("\n\n\n")
-data = r2.json()
-dictionary = data
-for value in dictionary.values():
-    prkn = value['name']
-    prki = value['image']
-    print(prkn+"\n"+prki)
+#print("\n\n\n")
+#data = r2.json()
+#dictionary = data
+#for value in dictionary.values():
+#    prkn = value['name']
+#    prki = value['image']
+#    print(prkn+"\n"+prki)
 
 
 #arquivo1= open('./jsons/characters.json', encoding="utf8")

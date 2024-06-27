@@ -1,13 +1,12 @@
 import discord
 import os
 import asyncio
-import ffmpeg
 import random
 import json
 from deep_translator import GoogleTranslator
 import yt_dlp as youtube_dl
 from dotenv import load_dotenv
-from discord.ext import commands,tasks
+from discord.ext import commands
 
 load_dotenv()
 
@@ -15,34 +14,28 @@ DISCORD_TOKEN = os.getenv('MORI')
 
 print(DISCORD_TOKEN)
 
-
 intents = discord.Intents().all()
-client = discord.Client(intents=intents)
-bot = commands.Bot(command_prefix='/',intents=intents)
+bot = commands.Bot(command_prefix='/', intents=intents)
 
 youtube_dl.utils.bug_reports_message = lambda: ''
 
 ytdl_format_options = {
-        'format': 'bestaudio/best',
-        'extractaudio': True,
-        'audioformat': 'mp3',
-        'outtmpl': './downloads/%(title)s.%(ext)s',
-        'restrictfilenames': True,
-        'noplaylist': True,
-        'nocheckcertificate': True,
-        'ignoreerrors': False,
-        'logtostderr': False,
-        'quiet': True,
-        'no_warnings': True,
-        'default_search': 'auto',
-        'source_address': '0.0.0.0',
+    'format': 'bestaudio/best',
+    'extractaudio': True,
+    'audioformat': 'mp3',
+    'outtmpl': './downloads/%(title)s.%(ext)s',
+    'restrictfilenames': True,
+    'noplaylist': True,
+    'nocheckcertificate': True,
+    'ignoreerrors': False,
+    'logtostderr': False,
+    'quiet': True,
+    'no_warnings': True,
+    'default_search': 'auto',
+    'source_address': '0.0.0.0',
 }
 
-ffmpeg_options = {'options': '-vn'}
-
 ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
-
-titulo_video = ''
 
 class YTDLSource(discord.PCMVolumeTransformer):
     def __init__(self, source, *, data, volume=0.7):
@@ -55,28 +48,26 @@ class YTDLSource(discord.PCMVolumeTransformer):
         self.channel = data.get('channel')
 
     @classmethod
-    async def from_url(cls, url, *, loop=None, stream=False,ctx):
-        loop = loop or asyncio.get_event_loop()
-        data = await loop.run_in_executor(None, lambda: ytdl.extract_info(url, download=not stream))
+    async def from_query(cls, query, ctx):
+        loop = asyncio.get_event_loop()
+        data = await loop.run_in_executor(None, lambda: ytdl.extract_info(query, download=False))
         if 'entries' in data:
-            # take first item from a playlist
             data = data['entries'][0]
-        filename = data['title'] if stream else ytdl.prepare_filename(data)
 
         titulo_video = str(data['title'])
         imagem = str(data['thumbnail'])
         duracao = str(data['duration_string'])
         url = str(data['original_url'])
         canal = str(data['channel'])
-	#ainda dá para adicionar mais coisas
 
-        embed = mensagem("","",imagem,f"**Título:**{titulo_video}\n**Canal:** {canal}\n**Duração: **{duracao}")
+        embed = mensagem("", "", imagem, f"**Título: **{titulo_video}\n**Canal: ** {canal}\n**Duração: **{duracao}")
         embed.set_footer(text=f"URL: {url}")
+
         await ctx.send(embed=embed)
 
-        return filename
+        return data['url']
 
-# Remove o comando de ajuda padrão, eu decidi criar o meu próprio
+# Remove o comando de ajuda padrão, decidi criar o meu próprio
 bot.remove_command('help')
 
 @bot.event
@@ -85,56 +76,50 @@ async def on_ready():
 
 @bot.command(name='join', help='Chama o bot para o chat de voz')
 async def join(ctx):
-    if not ctx.message.author.voice:
-        embed = mensagem("","","","{} não está conectado à um canal de voz".format(ctx.message.author.name))
+    if not ctx.author.voice:
+        embed = mensagem("", "", "", "{} não está conectado à um canal de voz".format(ctx.author.name))
         await ctx.send(embed=embed)
         return
     else:
-        voice_client = ctx.message.guild.voice_client
+        voice_client = ctx.guild.voice_client
         if not voice_client:
-            embed = mensagem("","","","Conectando ao canal de voz.")
+            embed = mensagem("", "", "", "Conectando ao canal de voz.")
             await ctx.send(embed=embed)
             
-            channel = ctx.message.author.voice.channel
+            channel = ctx.author.voice.channel
             await channel.connect()
         else:
-            embed = mensagem("","","","O bot já está conectado ao canal de voz.")
+            embed = mensagem("", "", "", "O bot já está conectado ao canal de voz.")
             await ctx.send(embed=embed)
 
 @bot.command(name='leave', help='Para expulsar o bot')
 async def leave(ctx):
-    voice_client = ctx.message.guild.voice_client
+    voice_client = ctx.guild.voice_client
     if voice_client:
         if voice_client.is_connected():
-            embed = mensagem("","","","Desconectando do canal de voz.")
+            embed = mensagem("", "", "", "Desconectando do canal de voz.")
             await ctx.send(embed=embed)
             await voice_client.disconnect()
         else:
-            embed = mensagem("","","","O bot não está conectado à um canal de voz.")
+            embed = mensagem("", "", "", "O bot não está conectado à um canal de voz.")
             await ctx.send(embed=embed)
     else:
-        embed = mensagem("","","","O bot não está no canal de voz.")
+        embed = mensagem("", "", "", "O bot não está no canal de voz.")
         await ctx.send(embed=embed)
 
-@bot.command(name='play', help='Toca a musica especificada pela url em seguida')
-async def play(ctx,url):
-    try :
-        # Conecta o bot se não estiver conectado
+@bot.command(name='play', help='Toca a música especificada pela url ou pesquisa')
+async def play(ctx, *, query):
+    try:
         await join(ctx)
-        # Se outra pessoa pedir para tocar, ele vai imediatamente
-        voice_client = ctx.message.guild.voice_client
+
+        voice_client = ctx.guild.voice_client
         if voice_client.is_playing():
             voice_client.stop()
+
+        url = await YTDLSource.from_query(query, ctx)
         
-        server = ctx.message.guild
-        voice_channel = server.voice_client
+        voice_client.play(discord.FFmpegPCMAudio(executable="C:\\ffmpeg\\bin\\ffmpeg.exe", source=url))
 
-        filename = await YTDLSource.from_url(url, loop=bot.loop,ctx=ctx)
-            
-        #windows: "C:\\ffmpeg\\bin\\ffmpeg.exe"                
-        voice_channel.play(discord.FFmpegPCMAudio(executable="C:\\ffmpeg\\bin\\ffmpeg.exe", source=filename))
-
-        #voice_channel.play(discord.FFmpegPCMAudio(filename, **ffmpeg_options))
     except Exception as err:
         print(err)
         return
@@ -216,7 +201,7 @@ async def apresentar(ctx):
     await ctx.send(files=[file1, file2], embed=embed)
 
 @bot.command(name='info', help='Apresenta uma build de DBD para o killer')
-async def info(ctx,arg):
+async def info(ctx, *, arg):
     await info(ctx,arg)
 
 @bot.command(name='sb', help='Apresenta uma build de DBD para o survivor')
@@ -241,13 +226,13 @@ async def help(ctx):
         
         description ='/help - Esta função exibe os comandos do bot\n'
         description+='/join - Chama o bot para o chat de voz\n'
-        description+='/play <url> ou "pesquisa" - Toca a musica especificada pela url em seguida\n'
+        description+='/play <url> ou *nome* - Toca a musica especificada pela url em seguida\n'
         description+='/leave - Abandona o chat de voz\n'
         description+='/pause - Pausa a música atual\n'
         description+='/resume - Continua com a música\n'
         description+='/stop - Para a música\n'
         description+='/apresentar - Apresenta dados sobre o servidor\n\n\n**Funções do DBD:**\n'
-        description+='/info "Nome correto do personagem" - Apresenta informações do personagem especificado\n'
+        description+='/info *nome do personagem* - Apresenta informações do personagem especificado\n'
         description+='/sb - Apresenta uma build de DBD para o sobrevivente\n'
         description+='/kb - Apresenta uma build de DBD para o killer\n'
         description+='/alls - Apresenta todos os sobreviventes\n'
@@ -299,39 +284,49 @@ def mensagem(title,url1,url2,description):
     embed.description = description
     return embed
 
-async def info(ctx,arg):
-    arquivo1= open('./jsons/characters2.json', encoding="utf8")
+async def info(ctx, arg):
+    arquivo1 = open('./jsons/characters2.json', encoding="utf8")
     characters = json.loads(arquivo1.read())
 
     try:
         achou = False
+        found_character = None
+        max_score = 0
+
         for value in characters.values():
-            if value['name'] == str(arg):
+            score = process.extractOne(arg, [value['name']], scorer=fuzz.ratio)[1]
+
+            if score >= 80:  # Ajuste o limite de pontuação conforme necessário
                 achou = True
-                
-                bio = '{}'.format(value['bio'])
+                found_character = value
+                break
+            elif score > max_score:
+                max_score = score
+                found_character = value
 
-                bio_traduzida = GoogleTranslator(source='auto', target='pt').translate(bio)
+        if achou and found_character is not None:
+            bio = '{}'.format(found_character['bio'])
+            bio_traduzida = GoogleTranslator(source='auto', target='pt').translate(bio)
 
-                embed = mensagem("Informações de {}:".format(value['name']),"","","")
-
-                url = value['image']
-                if url.startswith('h'):
-                    embed.set_image(url=value['image'])
-
-                embed.add_field(name="Bio:", value="{}".format(bio_traduzida), inline = False)
-                await ctx.send(embed = embed)
-                return
+            # Verifica o tamanho do conteúdo do embed
+            embed_content = f"Informações de {found_character['name']}:\n\nBio: {bio_traduzida}"
+            if len(embed_content) > 2000:  # Limite do Discord para embeds
+                await ctx.send(f"As informações sobre {found_character['name']} são muito extensas para serem exibidas aqui.")
             else:
-                achou = False
-    except Exception:
-        embed = mensagem("","","","Infelizmente o discord não permite mensagens muito grandes.")
-        return
-    
-    if achou is False:
-        embed = mensagem("","","","Não encontrei dados sobre esse personagem.")
-        await ctx.send(embed = embed)
+                embed = mensagem(f"Informações de {found_character['name']}:", "", "", f"Bio: {bio_traduzida}")
+                url = found_character['image']
+                if url.startswith('h'):
+                    embed.set_image(url=found_character['image'])
+                await ctx.send(embed=embed)
+        else:
+            embed = mensagem("", "", "", f"Não encontrei dados sobre '{arg}'.")
+            await ctx.send(embed=embed)
 
+    except Exception as e:
+        print(e)
+        embed = mensagem("", "", "", "Ocorreu um erro ao processar a solicitação.")
+        await ctx.send(embed=embed)
+        
 async def randomizar(ctx,role,arg):
     arquivo1= open('./jsons/characters2.json', encoding="utf8")
     characters = json.loads(arquivo1.read())
