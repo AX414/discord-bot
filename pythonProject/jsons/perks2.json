@@ -1,0 +1,110 @@
+{
+    "Ace_In_The_Hole": {
+    "categories": [
+    "support"
+    ],
+    "name": "Ace in the Hole",
+    "description": "Lady Luck always seems to be throwing something good your way.<br><br>When retrieving an item from a chest, there is a {0}% chance that a Very Rare (or lower) add-on will be attached to it.<br><br>{1}% chance of finding an add-on of Uncommon rarity (or lower).<br><br>When escaping, keep any add-ons your item has.",
+    "role": "survivor",
+    "character": 6,
+    "tunables": [
+    [
+    "100"
+    ],
+    [
+    "10",
+    "25",
+    "50"
+    ]
+    ],
+    "teachable": 40,
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/2/24/IconPerks_aceInTheHole.png"
+    },
+    "Adrenaline": {
+    "categories": [
+    "navigation",
+    "adaptation"
+    ],
+    "name": "Adrenaline",
+    "description": "You are fuelled by unexpected energy when on the verge of escape.<br><br>This perk activates when the exit gates are powered.<br><br>Instantly heal one health state if you are injured or in the dying state and sprint at {0}% of your normal running speed for {1} seconds.<br><br>Adrenaline ignores the Exhausted status effect. Causes the <b>Exhausted</b> status effect for {2} seconds.<br><br>Exhausted prevents Survivors from activating exhausting perks.",
+    "role": "survivor",
+    "character": 1,
+    "tunables": [
+    [
+    "150"
+    ],
+    [
+    "3"
+    ],
+    [
+    "60",
+    "50",
+    "40"
+    ]
+    ],
+    "teachable": 40,
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/f/f7/IconPerks_adrenaline.png"
+    },
+    "Aftercare": {
+    "categories": [
+    "perception"
+    ],
+    "name": "Aftercare",
+    "description": "Unlocks potential in one's aura reading ability.<br><br>You see the aura of every Survivor that:<br><br><li>You rescue from a hook, or rescues you from a hook;</li><li>You complete a healing action on, or completes a healing action on you.</li><br><br>They also see your aura.<br><br>This occurs for up to {0} Survivors. All effects of <i>Aftercare</i> are reset when you are hooked by The Killer.",
+    "role": "survivor",
+    "character": 14,
+    "tunables": [
+    [
+    "1",
+    "2",
+    "3"
+    ],
+    [
+    "1",
+    "2",
+    "3"
+    ]
+    ],
+    "teachable": 35,
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/0d/IconPerks_aftercare.png"
+    },
+    "Agitation": {
+    "categories": [
+    "enhancement"
+    ],
+    "name": "Agitation",
+    "description": "You get excited in anticipation of hooking your prey.<br><br>Increases your movement speed while transporting bodies by {0}%. While transporting a body, your Terror Radius is increased by {1} meters.",
+    "role": "killer",
+    "character": 268435456,
+    "tunables": [
+    [
+    "6",
+    "12",
+    "18"
+    ],
+    [
+    "12"
+    ]
+    ],
+    "teachable": 40,
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/ac/IconPerks_agitation.png"
+    },
+    "Alert": {
+    "categories": [
+    "perception"
+    ],
+    "name": "Alert",
+    "description": "Your acute senses are on high alert.<br><br>When the Killer performs a break action, the Killer is revealed to you for {0} seconds.",
+    "role": "survivor",
+    "character": 8,
+    "tunables": [
+    [
+    "3",
+    "4",
+    "5"
+    ]
+    ],
+    "teachable": 40,
+    "image": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/7/71/IconPerks_alert.png"
+    }
+}

@@ -7,3 +7,4 @@ python-dotenv
 PyNaCl
 ffmpeg
 fuzzywuzzy
+pillow
