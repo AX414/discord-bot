@@ -119,7 +119,17 @@ async def play(ctx, *, query):
 
         url = await YTDLSource.from_query(query, ctx)
         
-        voice_client.play(discord.FFmpegPCMAudio(executable="C:\\ffmpeg\\bin\\ffmpeg.exe", source=url))
+        # Verifica se estamos rodando dentro do Docker
+        is_docker = os.environ.get('DOCKER_ENVIRONMENT', 'false').lower() == 'true'
+
+        # Define o caminho do ffmpeg dependendo do ambiente
+        if is_docker:
+            ffmpeg_path = "/usr/bin/ffmpeg"  # Exemplo de caminho dentro do Docker
+        else:
+            ffmpeg_path = "C:\\ffmpeg\\bin\\ffmpeg.exe"  # Caminho local padrão
+
+        # Toca o áudio usando o caminho correto do ffmpeg
+        voice_client.play(discord.FFmpegPCMAudio(executable=ffmpeg_path, source=url))
 
     except Exception as err:
         print(err)
@@ -370,15 +380,24 @@ async def randomizar(ctx,role,arg):
     d3 = GoogleTranslator(source='auto', target='pt').translate(perk3['name'])
     d4 = GoogleTranslator(source='auto', target='pt').translate(perk4['name'])
     
+    if perk1['name'] == "No Mither":
+        d1 = "Sem incômodos"
+    elif perk2['name'] == "No Mither":
+        d2 = 'Sem incômodos'
+    elif perk3['name'] == "No Mither":
+        d3 = 'Sem incômodos'
+    elif perk4['name'] == "No Mither":
+        d4 = 'Sem incômodos'
+    
     embed = mensagem("Build do {}:".format(role),"","","Personagem: {}".format(personagem['name']))
     embed.set_thumbnail(url=url_thumb)
 
     embed.set_image(url=personagem['image'])
 
-    embed.add_field(name="\n{}".format(perk1['name']), value="Tradução: "+d1, inline = False)
-    embed.add_field(name="\n{}".format(perk2['name']), value="Tradução: "+d2, inline = False)
-    embed.add_field(name="\n{}".format(perk3['name']), value="Tradução: "+d3, inline = False)
-    embed.add_field(name="\n{}".format(perk4['name']), value="Tradução: "+d4, inline = False)
+    embed.add_field(name="\n{}".format(perk1['name']), value=d1.capitalize(), inline = False)
+    embed.add_field(name="\n{}".format(perk2['name']), value=d2.capitalize(), inline = False)
+    embed.add_field(name="\n{}".format(perk3['name']), value=d3.capitalize(), inline = False)
+    embed.add_field(name="\n{}".format(perk4['name']), value=d4.capitalize(), inline = False)
 
     await ctx.send(files=[file], embed = embed)
 

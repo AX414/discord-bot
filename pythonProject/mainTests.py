@@ -8,7 +8,7 @@ import requests
 import yt_dlp as youtube_dl
 from dotenv import load_dotenv
 from discord.ext import commands
-from fuzzywuzzy import process, fuzz  # Add this line
+from fuzzywuzzy import process, fuzz
 from io import BytesIO
 from PIL import Image
 
@@ -122,8 +122,17 @@ async def play(ctx, *, query):
 
         url = await YTDLSource.from_query(query, ctx)
         
-        voice_client.play(discord.FFmpegPCMAudio(executable="C:\\ffmpeg\\bin\\ffmpeg.exe", source=url))
+        # Verifica se estamos rodando dentro do Docker
+        is_docker = os.environ.get('DOCKER_ENVIRONMENT', 'false').lower() == 'true'
 
+        # Define o caminho do ffmpeg dependendo do ambiente
+        if is_docker:
+            ffmpeg_path = "/usr/bin/ffmpeg"  # Exemplo de caminho dentro do Docker
+        else:
+            ffmpeg_path = "C:\\ffmpeg\\bin\\ffmpeg.exe"  # Caminho local padrão
+
+        # Toca o áudio usando o caminho correto do ffmpeg
+        voice_client.play(discord.FFmpegPCMAudio(executable=ffmpeg_path, source=url))
     except Exception as err:
         print(err)
         return
