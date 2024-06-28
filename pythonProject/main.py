@@ -119,17 +119,22 @@ async def play(ctx, *, query):
 
         url = await YTDLSource.from_query(query, ctx)
         
-        # Verifica se estamos rodando dentro do Docker
-        is_docker = os.environ.get('DOCKER_ENVIRONMENT', 'false').lower() == 'true'
+        # Define os caminhos possíveis para o ffmpeg
+        ffmpeg_paths = [
+            "/usr/bin/ffmpeg",          # Exemplo de caminho dentro do Docker
+            "C:\\ffmpeg\\bin\\ffmpeg.exe"  # Caminho local padrão
+        ]
 
-        # Define o caminho do ffmpeg dependendo do ambiente
-        if is_docker:
-            ffmpeg_path = "/usr/bin/ffmpeg"  # Exemplo de caminho dentro do Docker
+        # Tenta tocar o áudio usando um dos caminhos do ffmpeg
+        for ffmpeg_path in ffmpeg_paths:
+            try:
+                voice_client.play(discord.FFmpegPCMAudio(executable=ffmpeg_path, source=url))
+                break  # Sai do loop se a reprodução foi bem-sucedida
+            except FileNotFoundError:
+                continue  # Tenta o próximo caminho se o atual não for encontrado
         else:
-            ffmpeg_path = "C:\\ffmpeg\\bin\\ffmpeg.exe"  # Caminho local padrão
-
-        # Toca o áudio usando o caminho correto do ffmpeg
-        voice_client.play(discord.FFmpegPCMAudio(executable=ffmpeg_path, source=url))
+            # Se nenhum caminho funcionar, envie uma mensagem de erro
+            print("Nenhum executável ffmpeg encontrado. Verifique os caminhos configurados.")
 
     except Exception as err:
         print(err)

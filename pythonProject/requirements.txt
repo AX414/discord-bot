@@ -8,3 +8,4 @@ PyNaCl
 ffmpeg
 fuzzywuzzy
 pillow
+python-Levenshtein
