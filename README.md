@@ -1,4 +1,5 @@
-# Mori - Um bot do Discord para randomizar perks de Dead by Daylight:
+<html>
+<h1>Mori - Um bot do Discord para randomizar perks de Dead by Daylight</h1>
 
 <img src="https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/8/86/FulliconFavors_ebonyMementoMori.png/revision/latest?cb=20200821203851">
 
@@ -38,3 +39,5 @@ Para executar ele, é necessário instalar as bibliotecas a com: pip install dis
 </tr>
 </tbody>
 </table>
+
+</html>
